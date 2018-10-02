@@ -31,6 +31,7 @@ namespace SetupAssistent.ViewModel
             _navigationViewModel = navigationViewModel;
             LoadModuleCommand = new MyICommand(onLoadModule, canLoadModule);
             CreateNewModuleCommand = new MyICommand(onCreateNewModule, canCreateNewModule);
+            //These paths are just for testing. I'll have these be settable later in a settings view.
             ModulesFile = String.Format("C:\\Users\\{0}\\Desktop\\TestFolder\\Modules.xml", userName);
             TasksFile = String.Format("C:\\Users\\{0}\\Desktop\\TestFolder\\Tasks.xml", userName);
 
