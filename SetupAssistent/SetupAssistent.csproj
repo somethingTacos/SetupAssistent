@@ -95,7 +95,6 @@
     <Compile Include="Views\TasksView.xaml.cs">
       <DependentUpon>TasksView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="VML\ViewModelLocator.cs" />
     <Page Include="CustomControls\TaskUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
