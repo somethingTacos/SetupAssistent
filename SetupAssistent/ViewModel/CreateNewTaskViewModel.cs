@@ -56,6 +56,7 @@ namespace SetupAssistent.ViewModel
 
         public void InitTaskTypes()
         {
+            //There has to be a better way to do this...
             RunScript tempRS = new RunScript();
             tempRS.Name = "";
             tempRS.Description = "";
