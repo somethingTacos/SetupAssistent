@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using SetupAssistent.Model;
 using System.Collections.ObjectModel;
 using System.Windows.Data;
+using System.IO;
+using System.Xml.Serialization;
+using System.Windows;
 
 namespace SetupAssistent.ViewModel
 {
@@ -47,18 +50,18 @@ namespace SetupAssistent.ViewModel
 
         public void onDoneCommand(object parameter)
         {
-            if(AllModuleTasks.TasksList.Count > 0)
+            if (AllModuleTasks.TasksList.Count > 0)
             {
                 ModuleTasks currentSelectedTasks = new ModuleTasks();
                 currentSelectedTasks.ScriptTasks = new ObservableCollection<RunScript>();
                 currentSelectedTasks.InstallProgramTasks = new ObservableCollection<InstallProgram>();
                 currentSelectedTasks.AddLocalAdminTasks = new ObservableCollection<AddLocalAdmin>();
 
-                foreach(object taskCollection in AllModuleTasks.TasksList)
+                foreach (object taskCollection in AllModuleTasks.TasksList)
                 {
-                    if(taskCollection is CollectionContainer CC)
+                    if (taskCollection is CollectionContainer CC)
                     {
-                        foreach(object task in CC.Collection)
+                        foreach (object task in CC.Collection)
                         {
                             if (task is RunScript RS)
                             {
@@ -91,8 +94,35 @@ namespace SetupAssistent.ViewModel
                     {
                         module.TasksList.Clear();
                         module.TasksList.Add(currentSelectedTasks);
-                        //Need to write these changes to the xml file to save them.   <<<----------- IMPORTANT!!! <<<<<<<<<<<<<<<<<<<<<<<<<<<<------------------<<<<<<<<<<<<<<<<<<<<<<<<<<<<--------------------<<<<<<<<<<<<<<<<<
                     }
+                }
+
+                try
+                {
+                    bool saved = false;
+                    //temporary variable, will remove this later.
+                    string outputPath = String.Format("C:\\Users\\{0}\\Desktop\\TestFolder\\Modules.xml", Environment.UserName);
+
+                    using (TextWriter writer = new StreamWriter(outputPath))
+                    {
+                        XmlSerializer xmlS = new XmlSerializer(typeof(ObservableCollection<Module>));
+                        xmlS.Serialize(writer, AllModules.modulesList);
+
+                        saved = true;
+                    }
+
+                    if (saved)
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
 

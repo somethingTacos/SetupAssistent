@@ -45,6 +45,7 @@ namespace SetupAssistent.ViewModel
             _navigationViewModel = navigationViewModel;
             CurrentTaskType = new TaskTypeIndex();
             CurrentTaskType.SelectedTaskTypeIndex = 0;
+            //This will be a setting later
             outputPath = String.Format("C:\\Users\\{0}\\Desktop\\TestFolder\\Tasks.xml", userName);
 
             InitTaskTypes();
@@ -85,7 +86,16 @@ namespace SetupAssistent.ViewModel
 
         public void onFindCommand(object parameter)
         {
-            MessageBox.Show("Test");
+            Microsoft.Win32.OpenFileDialog filePicker = new Microsoft.Win32.OpenFileDialog();
+            filePicker.Filter = "Batch|*.bat|PowerShell|*.ps1|"
+                              + "Accepted Types|*.bat;*.ps1";
+            filePicker.FilterIndex = 3;
+
+            Nullable<bool> result = filePicker.ShowDialog();
+            if (result == true)
+            {
+                NewRunScript.ScriptSource = filePicker.FileName.ToString();
+            }
         }
         public bool canFindCommand()
         {
@@ -112,6 +122,7 @@ namespace SetupAssistent.ViewModel
                                     ModuleTasks tasks = new ModuleTasks();
                                     tasks.ScriptTasks = new ObservableCollection<RunScript>();
                                     tasks.InstallProgramTasks = new ObservableCollection<InstallProgram>();
+                                    tasks.AddLocalAdminTasks = new ObservableCollection<AddLocalAdmin>();
 
                                     AllTasks.tasksList.Add(tasks);
                                 }

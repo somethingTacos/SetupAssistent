@@ -30,7 +30,7 @@ namespace SetupAssistent.ViewModel
             CancelCommand = new MyICommand(onCancelCommand, canCancelCommand);
             SaveCommand = new MyICommand(onSaveCommand, canSaveCommand);
             PicturePickerCommand = new MyICommand(onPicturePickerCommand, canPicturePickerCommand);
-
+            //output path will be set in settings later... I should propbably work on that.
             outputPath = String.Format("C:\\Users\\{0}\\Desktop\\TestFolder\\Modules.xml", userName);
             initNewModule();
         }
