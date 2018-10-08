@@ -17,6 +17,7 @@ namespace SetupAssistent.ViewModel
         public CompositeCollection TaskList { get; set; }
         public MyICommand BackCommand { get; set; }
         public MyICommand EditTasksCommand { get; set; }
+        public MyICommand RunTaskCommand { get; set; }
         public string CurrentModuleName { get; set; }
         private readonly NavigationViewModel _navigationViewModel;
         #endregion
@@ -29,6 +30,7 @@ namespace SetupAssistent.ViewModel
             _navigationViewModel = navigationViewModel;
             BackCommand = new MyICommand(onBackCommand, canBackCommand);
             EditTasksCommand = new MyICommand(onEditTasksCommand, canEditTasksCommand);
+            RunTaskCommand = new MyICommand(onRunTaskCommand, CanRunTaskCommand);
             //createDummytasks();
             LoadTasks();
         }
@@ -49,6 +51,15 @@ namespace SetupAssistent.ViewModel
             _navigationViewModel.SelectedViewModel = new AddTasksViewModel(_navigationViewModel, CurrentModuleName);
         }
         public bool canEditTasksCommand()
+        {
+            return true;
+        }
+
+        public void onRunTaskCommand(object parameter)
+        {
+            MessageBox.Show("Testing");
+        }
+        public bool CanRunTaskCommand()
         {
             return true;
         }

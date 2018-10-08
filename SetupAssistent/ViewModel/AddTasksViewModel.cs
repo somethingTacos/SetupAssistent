@@ -191,7 +191,6 @@ namespace SetupAssistent.ViewModel
 
         public void LoadTasks()
         {
-            //Need to set IsIncluded on tasks when they are loaded so AddTasks view knows to mark them as included.
             AllModuleTasks.ScriptTasks.Clear();
             AllModuleTasks.InstallProgramTasks.Clear();
             AllModuleTasks.AddLocalAdminTasks.Clear();

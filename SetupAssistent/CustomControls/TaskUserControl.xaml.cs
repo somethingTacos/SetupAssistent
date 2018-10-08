@@ -26,6 +26,9 @@ namespace SetupAssistent.CustomControls
         public static readonly DependencyProperty TaskDescriptionProperty =
             DependencyProperty.Register("TaskDescription", typeof(string), typeof(TaskUserControl), new PropertyMetadata("null"));
 
+        public static readonly DependencyProperty TaskCommandProperty =
+           DependencyProperty.Register("TaskCommand", typeof(ICommand), typeof(TaskUserControl), new PropertyMetadata(null));
+
         public string TaskName
         {
             get { return (string)GetValue(TaskNameProperty); }
@@ -35,6 +38,11 @@ namespace SetupAssistent.CustomControls
         {
             get { return (string)GetValue(TaskDescriptionProperty); }
             set { SetValue(TaskDescriptionProperty, value); }
+        }
+        public ICommand TaskCommand
+        {
+            get { return (ICommand)GetValue(TaskCommandProperty); }
+            set { SetValue(TaskCommandProperty, value); }
         }
 
         public TaskUserControl()
