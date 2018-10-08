@@ -200,16 +200,58 @@ namespace SetupAssistent.ViewModel
             {
                 foreach (RunScript runScript in AllTasks.tasksList[0].ScriptTasks)
                 {
+                    foreach (Module module in AllModules.modulesList)
+                    {
+                        if (module.Name == ModuleName)
+                        {
+                            foreach(RunScript _runScript in module.TasksList[0].ScriptTasks)
+                            {
+                                if(_runScript.Name == runScript.Name)
+                                {
+                                    runScript.IsIncluded = true;
+                                }
+                            }
+                        }
+                    }
+
                     AllModuleTasks.ScriptTasks.Add(runScript);
                 }
 
                 foreach(InstallProgram installProgram in AllTasks.tasksList[0].InstallProgramTasks)
                 {
+                    foreach (Module module in AllModules.modulesList)
+                    {
+                        if (module.Name == ModuleName)
+                        {
+                            foreach (InstallProgram _installProgram in module.TasksList[0].InstallProgramTasks)
+                            {
+                                if (_installProgram.Name == installProgram.Name)
+                                {
+                                    installProgram.IsIncluded = true;
+                                }
+                            }
+                        }
+                    }
+
                     AllModuleTasks.InstallProgramTasks.Add(installProgram);
                 }
 
                 foreach(AddLocalAdmin addLocalAdmin in AllTasks.tasksList[0].AddLocalAdminTasks)
                 {
+                    foreach (Module module in AllModules.modulesList)
+                    {
+                        if (module.Name == ModuleName)
+                        {
+                            foreach (AddLocalAdmin _addLocalAdmin in module.TasksList[0].AddLocalAdminTasks)
+                            {
+                                if (_addLocalAdmin.UserName == addLocalAdmin.UserName)
+                                {
+                                    addLocalAdmin.IsIncluded = true;
+                                }
+                            }
+                        }
+                    }
+
                     AllModuleTasks.AddLocalAdminTasks.Add(addLocalAdmin);
                 }
             }
