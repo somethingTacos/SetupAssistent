@@ -200,6 +200,7 @@ namespace SetupAssistent.ViewModel
             {
                 foreach (RunScript runScript in AllTasks.tasksList[0].ScriptTasks)
                 {
+                    runScript.IsIncluded = false;
                     foreach (Module module in AllModules.modulesList)
                     {
                         if (module.Name == ModuleName)
@@ -219,6 +220,7 @@ namespace SetupAssistent.ViewModel
 
                 foreach(InstallProgram installProgram in AllTasks.tasksList[0].InstallProgramTasks)
                 {
+                    installProgram.IsIncluded = false;
                     foreach (Module module in AllModules.modulesList)
                     {
                         if (module.Name == ModuleName)
@@ -238,6 +240,7 @@ namespace SetupAssistent.ViewModel
 
                 foreach(AddLocalAdmin addLocalAdmin in AllTasks.tasksList[0].AddLocalAdminTasks)
                 {
+                    addLocalAdmin.IsIncluded = false;
                     foreach (Module module in AllModules.modulesList)
                     {
                         if (module.Name == ModuleName)
