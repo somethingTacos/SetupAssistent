@@ -37,12 +37,17 @@
                 <!-- Run Script Task Template -->
                 <DataTemplate DataType="{x:Type data:RunScript}">
                     <controls:TaskUserControl TaskName="{Binding Name}" TaskDescription="{Binding Description}"
-                                              TaskCommand="{Binding DataContext.RunTaskCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}}"/>
+                                              TaskCommand="{Binding DataContext.RunTaskCommand,
+                                                            RelativeSource={RelativeSource Mode=FindAncestor,
+                                                            AncestorType=ItemsControl}}"/>
                 </DataTemplate>
 
                 <!-- Install Program Task Template -->
                 <DataTemplate DataType="{x:Type data:InstallProgram}">
-                    <controls:TaskUserControl TaskName="{Binding Name}" TaskDescription="{Binding Description}"/>
+                    <controls:TaskUserControl TaskName="{Binding Name}" TaskDescription="{Binding Description}"
+                                              TaskCommand="{Binding DataContext.RunTaskCommand,
+                                                            RelativeSource={RelativeSource Mode=FindAncestor,
+                                                            AncestorType=ItemsControl}}"/>
                 </DataTemplate>
             </ItemsControl.Resources>
         </ItemsControl>

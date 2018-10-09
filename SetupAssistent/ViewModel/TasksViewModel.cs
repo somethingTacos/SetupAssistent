@@ -31,7 +31,6 @@ namespace SetupAssistent.ViewModel
             BackCommand = new MyICommand(onBackCommand, canBackCommand);
             EditTasksCommand = new MyICommand(onEditTasksCommand, canEditTasksCommand);
             RunTaskCommand = new MyICommand(onRunTaskCommand, CanRunTaskCommand);
-            //createDummytasks();
             LoadTasks();
         }
         #endregion
@@ -98,24 +97,6 @@ namespace SetupAssistent.ViewModel
             {
                 MessageBox.Show("How the fuck did you get here??!??!?");
             }
-        }
-        #endregion
-
-
-        #region DummyData
-        public void createDummytasks()
-        {
-            //CompositeCollection tempCC = new CompositeCollection();
-            //ObservableCollection<RunScript> tempRS = new ObservableCollection<RunScript>();
-            //ObservableCollection<InstallProgram> tempIP = new ObservableCollection<InstallProgram>();
-
-            //tempRS.Add(new RunScript { Name = "Some Script", Description = "This is a script.", ScriptSource = "SomeURI_Here", ScriptParameters = "SomeParams" });
-            //tempIP.Add(new InstallProgram { Name = "Some Program", Description = "This is a program with a really long description so I can figure out how these will be handled.", ProgramSource = "SomeURI_Here" });
-
-            //tempCC.Add(new CollectionContainer() { Collection = tempRS });
-            //tempCC.Add(new CollectionContainer() { Collection = tempIP });
-            
-            //TaskList = tempCC;
         }
         #endregion
     }

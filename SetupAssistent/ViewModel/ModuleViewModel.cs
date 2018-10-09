@@ -34,12 +34,11 @@ namespace SetupAssistent.ViewModel
             //These paths are just for testing. I'll have these be settable later in a settings view.
             ModulesFile = String.Format("C:\\Users\\{0}\\Desktop\\TestFolder\\Modules.xml", userName);
             TasksFile = String.Format("C:\\Users\\{0}\\Desktop\\TestFolder\\Tasks.xml", userName);
-
-            //createDummyModules();
             LoadXMLData();
         }
         #endregion
 
+        #region LoadData
         public void LoadXMLData()
         {
             ObservableCollection<Module> tempOC_Modules = new ObservableCollection<Module>();
@@ -85,6 +84,7 @@ namespace SetupAssistent.ViewModel
                 AllTasks.LoadedAtStartup = true;
             }
         }
+        #endregion
 
         #region Commands Code
 
@@ -111,19 +111,6 @@ namespace SetupAssistent.ViewModel
             return true;
         }
 
-        #endregion
-
-        #region DummyData
-        //public void createDummyModules()
-        //{
-        //    ObservableCollection<Module> tempOC = new ObservableCollection<Module>();
-        //    tempOC.Add(new Module { Name = "Module 1", Description = "This is a module", allowEdit = true, allowRemove = true, ImageSource = "" });
-        //    tempOC.Add(new Module { Name = "Module 2", Description = "This is a module", allowEdit = true, allowRemove = true, ImageSource = "" });
-        //    tempOC.Add(new Module { Name = "Module 3", Description = "This is a module", allowEdit = true, allowRemove = true, ImageSource = "" });
-        //    tempOC.Add(new Module { Name = "Module 4", Description = "This is a module", allowEdit = true, allowRemove = true, ImageSource = "" });
-
-        //    ModuleList = tempOC;
-        //}
         #endregion
     }
 }
