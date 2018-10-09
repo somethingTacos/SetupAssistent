@@ -7,7 +7,8 @@
         xmlns:views="clr-namespace:SetupAssistent.Views"
         xmlns:vm="clr-namespace:SetupAssistent.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="600" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="400" Width="600" WindowStartupLocation="CenterScreen"
+        MinHeight="400" MinWidth="600">
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:ModuleViewModel}">
             <views:ModuleView/>
