@@ -19,6 +19,18 @@
             <RowDefinition Height="10"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
-        
+        <!--This is all up for change, just trying to get ideas.-->
+        <Rectangle Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Grid.ColumnSpan="3" RadiusX="50" RadiusY="50">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="Gray"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" RadiusX="50" RadiusY="50">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="Aqua"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <TextBlock Text="Sample Text" Grid.Column="1" Grid.Row="2" Margin="30 5" FontSize="40"/>
+        <Button Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Background="Transparent"/>
     </Grid>
 </UserControl>
