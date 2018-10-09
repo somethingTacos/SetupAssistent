@@ -31,7 +31,7 @@
                 <SolidColorBrush Color="Gainsboro"/>
             </Rectangle.Fill>
         </Rectangle>
-        <TextBlock Text="{Binding ModuleName, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" Grid.Column="1" Grid.Row="2" Margin="30 5 20 5" FontSize=""/>
+        <TextBlock Text="{Binding ModuleName, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" Grid.Column="1" Grid.Row="2" Margin="30 5 20 5"/>
         <!--<Button Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                 Command="{Binding Command, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=cc:ModuleUserControl}}"/>-->
     </Grid>
