@@ -17,6 +17,7 @@ namespace SetupAssistent.ViewModel
         public ObservableCollection<Module> ModuleList { get; set; }
         public MyICommand LoadModuleCommand { get; set; }
         public MyICommand CreateNewModuleCommand { get; set; }
+        public MyICommand RemoveModule { get; set; }
         public string workingModuleName { get; set; }
         public string userName = Environment.UserName.ToString();
         public string ModulesFile = string.Empty;
@@ -107,6 +108,15 @@ namespace SetupAssistent.ViewModel
         }
 
         public bool canLoadModule()
+        {
+            return true;
+        }
+
+        public void onRemoveModule(object parameter)
+        {
+
+        }
+        public bool canRemoveModule()
         {
             return true;
         }
