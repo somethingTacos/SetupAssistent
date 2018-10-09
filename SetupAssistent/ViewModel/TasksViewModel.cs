@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using SetupAssistent.Model;
 using System.Windows.Data;
 using System.Windows;
+using System.Diagnostics;
 
 namespace SetupAssistent.ViewModel
 {
@@ -56,7 +57,23 @@ namespace SetupAssistent.ViewModel
 
         public void onRunTaskCommand(object parameter)
         {
-            MessageBox.Show("Testing");
+            if(parameter is RunScript runScript)
+            {
+                ProcessStartInfo scriptTask = new ProcessStartInfo();
+                scriptTask.FileName = runScript.ScriptSource;
+                scriptTask.Arguments = runScript.ScriptParameters;
+                Process.Start(scriptTask);
+            }
+            if(parameter is InstallProgram installProgram)
+            {
+                ProcessStartInfo programTask = new ProcessStartInfo();
+                programTask.FileName = installProgram.ProgramSource;
+                Process.Start(programTask);
+            }
+            if(parameter is AddLocalAdmin addLocalAdmin)
+            {
+
+            }
         }
         public bool CanRunTaskCommand()
         {

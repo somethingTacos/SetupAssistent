@@ -87,14 +87,45 @@ namespace SetupAssistent.ViewModel
         public void onFindCommand(object parameter)
         {
             Microsoft.Win32.OpenFileDialog filePicker = new Microsoft.Win32.OpenFileDialog();
-            filePicker.Filter = "Batch|*.bat|PowerShell|*.ps1|"
-                              + "Accepted Types|*.bat;*.ps1";
-            filePicker.FilterIndex = 3;
+
+            switch(parameter.ToString())
+            {
+                case "RunScript":
+                    {
+
+                        filePicker.Filter = "Batch|*.bat|PowerShell|*.ps1|"
+                                          + "Accepted Types|*.bat;*.ps1";
+                        filePicker.FilterIndex = 3;
+                        break;
+                    }
+
+                case "InstallProgram":
+                    {
+                        filePicker.Filter = "Windows Installer|*.msi|Executable|*.exe|"
+                                         + "Accepted Types|*.msi;*.exe";
+                        filePicker.FilterIndex = 3;
+                        break;
+                    }
+            }
 
             Nullable<bool> result = filePicker.ShowDialog();
             if (result == true)
             {
-                NewRunScript.ScriptSource = filePicker.FileName.ToString();
+                switch (parameter.ToString())
+                {
+                    case "RunScript":
+                        {
+                            NewRunScript.ScriptSource = filePicker.FileName.ToString();
+
+                            break;
+                        }
+
+                    case "InstallProgram":
+                        {
+                            NewInstallProgram.ProgramSource = filePicker.FileName.ToString();
+                            break;
+                        }
+                }
             }
         }
         public bool canFindCommand()
