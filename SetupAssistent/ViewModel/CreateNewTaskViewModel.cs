@@ -24,6 +24,7 @@ namespace SetupAssistent.ViewModel
         public MyICommand SaveCommand { get; set; }
         public MyICommand CancelCommand { get; set; }
         public MyICommand FindCommand { get; set; }
+        public MyICommand HelpCommand { get; set; }
 
         private readonly NavigationViewModel _navigationViewModel;
         public string CurrentModuleName { get; set; }
@@ -41,6 +42,7 @@ namespace SetupAssistent.ViewModel
             CancelCommand = new MyICommand(onCancelCommand, canCancelCommand);
             SaveCommand = new MyICommand(onSaveCommand, canSaveCommand);
             FindCommand = new MyICommand(onFindCommand, canFindCommand);
+            HelpCommand = new MyICommand(onHelpCommand, canHelpCommand);
 
             _navigationViewModel = navigationViewModel;
             CurrentTaskType = new TaskTypeIndex();
@@ -272,6 +274,16 @@ namespace SetupAssistent.ViewModel
             _navigationViewModel.SelectedViewModel = new AddTasksViewModel(_navigationViewModel, CurrentModuleName);
         }
         public bool canCancelCommand()
+        {
+            return true;
+        }
+
+        public void onHelpCommand(object parameter)
+        {
+            //Currently only one thing uses this, so I'll fix this later if the need arises.
+            MessageBox.Show("Parameters work just like at the command line. Parameters are seperated by spaces.");
+        }
+        public bool canHelpCommand()
         {
             return true;
         }
