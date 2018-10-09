@@ -24,5 +24,32 @@ namespace SetupAssistent.CustomControls
         {
             InitializeComponent();
         }
+
+        public static readonly DependencyProperty ModuleNameProperty =
+            DependencyProperty.Register("ModuleName", typeof(string), typeof(ModuleUserControl), new PropertyMetadata(""));
+
+        public string ModuleName
+        {
+            get { return (string)GetValue(ModuleNameProperty); }
+            set { SetValue(ModuleNameProperty, value); }
+        }
+
+        public static readonly DependencyProperty ModuleDescriptionProperty =
+            DependencyProperty.Register("ModuleDesc", typeof(string), typeof(ModuleUserControl), new PropertyMetadata(""));
+
+        public string ModuleDesc
+        {
+            get { return (string)GetValue(ModuleDescriptionProperty); }
+            set { SetValue(ModuleDescriptionProperty, value); }
+        }
+
+        public static readonly DependencyProperty CommandProperty =
+            DependencyProperty.Register("Command", typeof(ICommand), typeof(ModuleUserControl), new PropertyMetadata(null));
+
+        public ICommand Command
+        {
+            get { return (ICommand)GetValue(CommandProperty); }
+            set { SetValue(CommandProperty, value); }
+        }
     }
 }

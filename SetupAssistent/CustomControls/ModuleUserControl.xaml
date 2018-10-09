@@ -4,8 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SetupAssistent.CustomControls"
+             xmlns:cc="clr-namespace:SetupAssistent.CustomControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="500">
+             d:DesignHeight="200" d:DesignWidth="300">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
@@ -14,7 +15,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10"/>
             <RowDefinition Height="10"/>
@@ -22,15 +23,16 @@
         <!--This is all up for change, just trying to get ideas.-->
         <Rectangle Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Grid.ColumnSpan="3" RadiusX="50" RadiusY="50">
             <Rectangle.Fill>
-                <SolidColorBrush Color="Gray"/>
+                <SolidColorBrush Color="LightSlateGray"/>
             </Rectangle.Fill>
         </Rectangle>
         <Rectangle Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" RadiusX="50" RadiusY="50">
             <Rectangle.Fill>
-                <SolidColorBrush Color="Aqua"/>
+                <SolidColorBrush Color="Gainsboro"/>
             </Rectangle.Fill>
         </Rectangle>
-        <TextBlock Text="Sample Text" Grid.Column="1" Grid.Row="2" Margin="30 5" FontSize="40"/>
-        <Button Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Background="Transparent"/>
+        <TextBlock Text="{Binding ModuleName, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" Grid.Column="1" Grid.Row="2" Margin="30 5 20 5" FontSize=""/>
+        <!--<Button Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
+                Command="{Binding Command, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=cc:ModuleUserControl}}"/>-->
     </Grid>
 </UserControl>
