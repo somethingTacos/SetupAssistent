@@ -8,7 +8,8 @@
              d:DesignHeight="200" d:DesignWidth="300"
              MouseLeftButtonDown="UserControl_MouseLeftButtonDown"
              MouseLeftButtonUp="UserControl_MouseLeftButtonUp"
-             MouseLeave="UserControl_MouseLeave">
+             MouseLeave="UserControl_MouseLeave"
+             MouseEnter="UserControl_MouseEnter">
     <UserControl.Style>
         <Style TargetType="UserControl">
             <Setter Property="local:ModuleUserControl.ModuleBorderColor" Value="LightSlateGray"/>

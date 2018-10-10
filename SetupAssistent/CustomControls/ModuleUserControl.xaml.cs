@@ -110,6 +110,12 @@ namespace SetupAssistent.CustomControls
         private void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
             SelectedModule = null;
+            //run some animations for fancy here on mouse leave
+        }
+
+        private void UserControl_MouseEnter(object sender, MouseEventArgs e)
+        {
+            //run some animations for fancy here on mouse enter
         }
     }
 }
