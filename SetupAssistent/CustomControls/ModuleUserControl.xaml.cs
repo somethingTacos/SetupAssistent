@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -54,33 +55,6 @@ namespace SetupAssistent.CustomControls
             get { return (ICommand)GetValue(CommandProperty); }
             set { SetValue(CommandProperty, value); }
         }
-
-        public static readonly DependencyProperty ModuleBorderColorProperty =
-            DependencyProperty.Register("ModuleBorderColor", typeof(Brush), typeof(ModuleUserControl), new FrameworkPropertyMetadata(Brushes.LightSlateGray));
-
-        public Brush ModuleBorderColor
-        {
-            get { return (Brush)GetValue(ModuleBorderColorProperty); }
-            set { SetValue(ModuleBorderColorProperty, value); }
-        }
-
-        public static readonly DependencyProperty ModuleBorderThicknessProperty =
-            DependencyProperty.Register("ModuleBorderThickness", typeof(int), typeof(ModuleUserControl), new PropertyMetadata(2));
-
-        public int ModuleBorderThickness
-        {
-            get { return (int)GetValue(ModuleBorderThicknessProperty); }
-            set { SetValue(ModuleBorderThicknessProperty, value); }
-        }
-
-
-        //public static readonly DependencyProperty IsHoveredModuleProperty =
-        //   DependencyProperty.Register("IsHoveredModule", typeof(bool), typeof(ModuleUserControl), new PropertyMetadata(false));
-        //public bool IsHoveredModule
-        //{
-        //    get { return (bool)GetValue(IsHoveredModuleProperty); }
-        //    set { SetValue(IsHoveredModuleProperty, value); }
-        //}
         #endregion
 
         private object _SelectedModule;
@@ -94,6 +68,8 @@ namespace SetupAssistent.CustomControls
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             SelectedModule = sender;
+
+            Module_Animation(8, Colors.Red, TimeSpan.FromMilliseconds(150));
         }
 
         private void UserControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -111,11 +87,24 @@ namespace SetupAssistent.CustomControls
         {
             SelectedModule = null;
             //run some animations for fancy here on mouse leave
+            Module_Animation(2, Colors.LightSlateGray, TimeSpan.FromMilliseconds(250));
         }
 
         private void UserControl_MouseEnter(object sender, MouseEventArgs e)
         {
             //run some animations for fancy here on mouse enter
+            Module_Animation(5, Colors.DodgerBlue, TimeSpan.FromMilliseconds(250));
+        }
+
+        public void Module_Animation(int NewBorderThickness, Color NewBorderColor, TimeSpan Duration)
+        {
+            DoubleAnimation animation1 = new DoubleAnimation(NewBorderThickness, Duration);
+            ColorAnimation animation2 = new ColorAnimation(NewBorderColor, Duration);
+
+            ModuleBody_rectangle.Stroke = new SolidColorBrush(NewBorderColor);
+
+            ModuleBody_rectangle.BeginAnimation(Rectangle.StrokeThicknessProperty, animation1);
+            ModuleBody_rectangle.Stroke.BeginAnimation(SolidColorBrush.ColorProperty, animation2);
         }
     }
 }
