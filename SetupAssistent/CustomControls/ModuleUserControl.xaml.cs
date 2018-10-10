@@ -56,7 +56,7 @@ namespace SetupAssistent.CustomControls
         }
 
         public static readonly DependencyProperty ModuleBorderColorProperty =
-            DependencyProperty.Register("StrokeColor", typeof(Brush), typeof(ModuleUserControl), new FrameworkPropertyMetadata(Brushes.LightSlateGray));
+            DependencyProperty.Register("ModuleBorderColor", typeof(Brush), typeof(ModuleUserControl), new FrameworkPropertyMetadata(Brushes.LightSlateGray));
 
         public Brush ModuleBorderColor
         {
@@ -65,7 +65,7 @@ namespace SetupAssistent.CustomControls
         }
 
         public static readonly DependencyProperty ModuleBorderThicknessProperty =
-            DependencyProperty.Register("BorderThickness", typeof(int), typeof(ModuleUserControl), new PropertyMetadata(2));
+            DependencyProperty.Register("ModuleBorderThickness", typeof(int), typeof(ModuleUserControl), new PropertyMetadata(2));
 
         public int ModuleBorderThickness
         {
