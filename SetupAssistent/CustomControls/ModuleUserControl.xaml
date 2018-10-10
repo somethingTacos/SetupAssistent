@@ -4,9 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SetupAssistent.CustomControls"
-             xmlns:cc="clr-namespace:SetupAssistent.CustomControls"
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="300">
+             d:DesignHeight="200" d:DesignWidth="300"
+             MouseLeftButtonDown="UserControl_MouseLeftButtonDown"
+             MouseLeftButtonUp="UserControl_MouseLeftButtonUp">
+    <UserControl.Style>
+        <Style TargetType="local:ModuleUserControl">
+            <Setter Property="StrokeColor" Value="LightSlateGray"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="StrokeColor" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Style>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
@@ -21,17 +32,14 @@
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
         <!--This is all up for change, just trying to get ideas.-->
-        <Rectangle Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Grid.ColumnSpan="3" RadiusX="50" RadiusY="50">
-            <Rectangle.Fill>
-                <SolidColorBrush Color="LightSlateGray"/>
-            </Rectangle.Fill>
-        </Rectangle>
-        <Rectangle Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" RadiusX="50" RadiusY="50">
+        <Rectangle Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" 
+                   Stroke="{Binding StrokeColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ModuleUserControl}}" 
+                   StrokeThickness="5">
             <Rectangle.Fill>
                 <SolidColorBrush Color="Gainsboro"/>
             </Rectangle.Fill>
         </Rectangle>
-        <TextBlock Text="{Binding ModuleName, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" Grid.Column="1" Grid.Row="2" Margin="30 5 20 5"/>
+        <TextBlock Text="{Binding ModuleName, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" Grid.Column="1" Grid.Row="2" Margin="30 5 20 5" FontSize="16"/>
         <!--<Button Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                 Command="{Binding Command, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=cc:ModuleUserControl}}"/>-->
     </Grid>

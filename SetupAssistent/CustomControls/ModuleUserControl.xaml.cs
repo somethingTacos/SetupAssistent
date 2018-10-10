@@ -25,6 +25,10 @@ namespace SetupAssistent.CustomControls
             InitializeComponent();
         }
 
+
+        public static readonly DependencyProperty StrokeColorProperty =
+            DependencyProperty.Register("StrokeColor", typeof(Brush), typeof(ModuleUserControl), new FrameworkPropertyMetadata(Brushes.LightSlateGray));
+
         public static readonly DependencyProperty ModuleNameProperty =
             DependencyProperty.Register("ModuleName", typeof(string), typeof(ModuleUserControl), new PropertyMetadata(""));
 
@@ -50,6 +54,22 @@ namespace SetupAssistent.CustomControls
         {
             get { return (ICommand)GetValue(CommandProperty); }
             set { SetValue(CommandProperty, value); }
+        }
+
+        public Brush StrokeColor
+        {
+            get { return (Brush)GetValue(StrokeColorProperty); }
+            set { SetValue(StrokeColorProperty, value); }
+        }
+
+        private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void UserControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }
