@@ -72,16 +72,44 @@ namespace SetupAssistent.CustomControls
             get { return (int)GetValue(ModuleBorderThicknessProperty); }
             set { SetValue(ModuleBorderThicknessProperty, value); }
         }
+
+
+        //public static readonly DependencyProperty IsHoveredModuleProperty =
+        //   DependencyProperty.Register("IsHoveredModule", typeof(bool), typeof(ModuleUserControl), new PropertyMetadata(false));
+        //public bool IsHoveredModule
+        //{
+        //    get { return (bool)GetValue(IsHoveredModuleProperty); }
+        //    set { SetValue(IsHoveredModuleProperty, value); }
+        //}
         #endregion
+
+        private object _SelectedModule;
+
+        public object SelectedModule
+        {
+            get { return _SelectedModule; }
+            set { _SelectedModule = value; }
+        }
 
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            SelectedModule = sender;
         }
 
         private void UserControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            if(sender != null && SelectedModule != null)
+            {
+                if(sender == SelectedModule)
+                {
+                    MessageBox.Show("Do the thing.");
+                }
+            }
+        }
 
+        private void UserControl_MouseLeave(object sender, MouseEventArgs e)
+        {
+            SelectedModule = null;
         }
     }
 }
