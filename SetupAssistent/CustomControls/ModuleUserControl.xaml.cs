@@ -26,8 +26,7 @@ namespace SetupAssistent.CustomControls
         }
 
 
-        public static readonly DependencyProperty StrokeColorProperty =
-            DependencyProperty.Register("StrokeColor", typeof(Brush), typeof(ModuleUserControl), new FrameworkPropertyMetadata(Brushes.LightSlateGray));
+        #region Dependency Properties
 
         public static readonly DependencyProperty ModuleNameProperty =
             DependencyProperty.Register("ModuleName", typeof(string), typeof(ModuleUserControl), new PropertyMetadata(""));
@@ -56,11 +55,24 @@ namespace SetupAssistent.CustomControls
             set { SetValue(CommandProperty, value); }
         }
 
-        public Brush StrokeColor
+        public static readonly DependencyProperty ModuleBorderColorProperty =
+            DependencyProperty.Register("StrokeColor", typeof(Brush), typeof(ModuleUserControl), new FrameworkPropertyMetadata(Brushes.LightSlateGray));
+
+        public Brush ModuleBorderColor
         {
-            get { return (Brush)GetValue(StrokeColorProperty); }
-            set { SetValue(StrokeColorProperty, value); }
+            get { return (Brush)GetValue(ModuleBorderColorProperty); }
+            set { SetValue(ModuleBorderColorProperty, value); }
         }
+
+        public static readonly DependencyProperty ModuleBorderThicknessProperty =
+            DependencyProperty.Register("BorderThickness", typeof(int), typeof(ModuleUserControl), new PropertyMetadata(2));
+
+        public int ModuleBorderThickness
+        {
+            get { return (int)GetValue(ModuleBorderThicknessProperty); }
+            set { SetValue(ModuleBorderThicknessProperty, value); }
+        }
+        #endregion
 
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

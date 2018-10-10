@@ -29,7 +29,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type data:Module}">
-                    <cc:ModuleUserControl ModuleName="{Binding Name}" Height="160" Width="200" StrokeColor="LightSlateGray"
+                    <cc:ModuleUserControl ModuleName="{Binding Name}" Height="160" Width="200"
                                           Command="{Binding DataContext.LoadModuleCommand,
                                           RelativeSource={RelativeSource Mode=FindAncestor,
                                           AncestorType={x:Type ItemsControl}}}"/>
