@@ -29,15 +29,16 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type data:Module}">
-                    <cc:ModuleUserControl ModuleName="{Binding Name}" Height="160" Width="200"
+                    <!-- I've no idea how to make this command work. I'm just going to try and reskin a button to get the command-->
+                    <!--<cc:ModuleUserControl ModuleName="{Binding Name}" Height="160" Width="200"
                                           Command="{Binding DataContext.LoadModuleCommand,
                                           RelativeSource={RelativeSource Mode=FindAncestor,
-                                          AncestorType={x:Type ItemsControl}}}"/>
-                    <!--<Button Content="{Binding Name}" Height="50" Width="200" Margin="5"
+                                          AncestorType={x:Type ItemsControl}}}"/>-->
+                    <Button Content="{Binding Name}" Height="50" Width="200" Margin="5"
                                 Command="{Binding DataContext.LoadModuleCommand,
                                 RelativeSource={RelativeSource Mode=FindAncestor,
                                 AncestorType={x:Type ItemsControl}}}"
-                                CommandParameter="{Binding}"/>-->
+                                CommandParameter="{Binding}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
