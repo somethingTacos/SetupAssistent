@@ -13,6 +13,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SetupAssistent.ViewModel;
 
 namespace SetupAssistent.CustomControls
 {
@@ -69,7 +70,7 @@ namespace SetupAssistent.CustomControls
         {
             SelectedModule = sender;
 
-            Module_Animation(8, Colors.Red, TimeSpan.FromMilliseconds(150));
+            Module_Animation(5, Colors.Orange, TimeSpan.FromMilliseconds(150));
         }
 
         private void UserControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -78,7 +79,9 @@ namespace SetupAssistent.CustomControls
             {
                 if(sender == SelectedModule)
                 {
-                    MessageBox.Show("Do the thing.");
+                    LoadModule_Animation();
+
+                    //I have no idea how to call the command from here or in xaml... this might be an issue...
                 }
             }
         }
@@ -93,18 +96,33 @@ namespace SetupAssistent.CustomControls
         private void UserControl_MouseEnter(object sender, MouseEventArgs e)
         {
             //run some animations for fancy here on mouse enter
-            Module_Animation(5, Colors.DodgerBlue, TimeSpan.FromMilliseconds(250));
+            Module_Animation(3, Colors.DarkMagenta, TimeSpan.FromMilliseconds(250));
         }
 
+        #region Animations
         public void Module_Animation(int NewBorderThickness, Color NewBorderColor, TimeSpan Duration)
         {
             DoubleAnimation animation1 = new DoubleAnimation(NewBorderThickness, Duration);
             ColorAnimation animation2 = new ColorAnimation(NewBorderColor, Duration);
 
-            ModuleBody_rectangle.Stroke = new SolidColorBrush(NewBorderColor);
+            Color CurrentColor = ((SolidColorBrush)ModuleBody_rectangle.Stroke).Color;
+            ModuleBody_rectangle.Stroke = new SolidColorBrush(CurrentColor);
 
             ModuleBody_rectangle.BeginAnimation(Rectangle.StrokeThicknessProperty, animation1);
             ModuleBody_rectangle.Stroke.BeginAnimation(SolidColorBrush.ColorProperty, animation2);
         }
+
+        public void LoadModule_Animation()
+        {
+            DoubleAnimation animation1 = new DoubleAnimation(15, TimeSpan.FromMilliseconds(200));
+            ColorAnimation animation2 = new ColorAnimation(Colors.Orange, TimeSpan.FromMilliseconds(150));
+
+            Color CurrentColor = ((SolidColorBrush)ModuleBody_rectangle.Fill).Color;
+            ModuleBody_rectangle.Fill = new SolidColorBrush(CurrentColor);
+
+            ModuleBody_rectangle.BeginAnimation(Rectangle.StrokeThicknessProperty, animation1);
+            ModuleBody_rectangle.Fill.BeginAnimation(SolidColorBrush.ColorProperty, animation2);
+        }
+        #endregion
     }
 }

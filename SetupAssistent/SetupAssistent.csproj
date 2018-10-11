@@ -66,6 +66,7 @@
       <DependentUpon>TaskUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\ModuleModel.cs" />
+    <Compile Include="Model\SettingsModel.cs" />
     <Compile Include="Model\TasksModel.cs" />
     <Compile Include="MyICommand.cs" />
     <Compile Include="ViewModel\AddTasksViewModel.cs" />
