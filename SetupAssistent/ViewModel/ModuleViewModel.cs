@@ -17,7 +17,8 @@ namespace SetupAssistent.ViewModel
         public ObservableCollection<Module> ModuleList { get; set; }
         public MyICommand LoadModuleCommand { get; set; }
         public MyICommand CreateNewModuleCommand { get; set; }
-        public MyICommand RemoveModule { get; set; }
+        public MyICommand RemoveModuleCommand { get; set; }
+        public MyICommand EditModuleCommand { get; set; }
         public string workingModuleName { get; set; }
         public string userName = Environment.UserName.ToString();
         public string ModulesFile = string.Empty;
@@ -30,8 +31,10 @@ namespace SetupAssistent.ViewModel
         public ModuleViewModel(NavigationViewModel navigationViewModel)
         {
             _navigationViewModel = navigationViewModel;
-            LoadModuleCommand = new MyICommand(onLoadModule, canLoadModule);
-            CreateNewModuleCommand = new MyICommand(onCreateNewModule, canCreateNewModule);
+            LoadModuleCommand = new MyICommand(onLoadModuleCommand, canLoadModuleCommand);
+            CreateNewModuleCommand = new MyICommand(onCreateNewModuleCommand, canCreateNewModuleCommand);
+            RemoveModuleCommand = new MyICommand(onRemoveModuleCommand, canRemoveModuleCommand);
+            EditModuleCommand = new MyICommand(onEditModuleCommand, canEditModuleCommand);
             //These paths are just for testing. I'll have these be settable later in a settings view.
             ModulesFile = String.Format("C:\\Users\\{0}\\Desktop\\TestFolder\\Modules.xml", userName);
             TasksFile = String.Format("C:\\Users\\{0}\\Desktop\\TestFolder\\Tasks.xml", userName);
@@ -89,17 +92,17 @@ namespace SetupAssistent.ViewModel
 
         #region Commands Code
 
-        public void onCreateNewModule(object parameter)
+        public void onCreateNewModuleCommand(object parameter)
         {
             _navigationViewModel.SelectedViewModel = new CreateNewModuleViewModel(_navigationViewModel);
         }
 
-        public bool canCreateNewModule()
+        public bool canCreateNewModuleCommand()
         {
             return true;
         }
 
-        public void onLoadModule(object parameter)
+        public void onLoadModuleCommand(object parameter)
         {
             if(parameter is Module item)
             {
@@ -107,16 +110,35 @@ namespace SetupAssistent.ViewModel
             }
         }
 
-        public bool canLoadModule()
+        public bool canLoadModuleCommand()
         {
             return true;
         }
 
-        public void onRemoveModule(object parameter)
+        public void onRemoveModuleCommand(object parameter)
         {
-
+            if(parameter is Module module)
+            {
+                MessageBoxResult result = MessageBox.Show(String.Format("Are you sure you want to remove '{0}'",module.Name.ToString()), "Remove Module", MessageBoxButton.YesNo);
+                if(result == MessageBoxResult.Yes)
+                {
+                    MessageBox.Show(String.Format("'{0}' would have been deleted", module.Name.ToString()));
+                }
+            }
         }
-        public bool canRemoveModule()
+        public bool canRemoveModuleCommand()
+        {
+            return true;
+        }
+
+        public void onEditModuleCommand(object parameter)
+        {
+            if(parameter is Module module)
+            {
+                MessageBox.Show(String.Format("'{0}' would launch edit Module View", module.Name.ToString()));
+            }
+        }
+        public bool canEditModuleCommand()
         {
             return true;
         }

@@ -5,10 +5,62 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SetupAssistent.Views"
              xmlns:data="clr-namespace:SetupAssistent.Model"
-             xmlns:cc="clr-namespace:SetupAssistent.CustomControls"
+             xmlns:helper="clr-namespace:SetupAssistent.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style x:Key="NoChromeButton" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid x:Name="Chrome" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD"/>
+                                <Setter Property="Opacity" TargetName="Chrome" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                                To="DodgerBlue" From="Transparent" Duration="0:0:0.200"/>
+                                <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)"
+                                                To="Gainsboro" From="Black" Duration="0:0:0.200"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                                To="Transparent" From="DodgerBlue" Duration="0:0:0.200"/>
+                                <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)"
+                                                To="Black" From="Gainsboro" Duration="0:0:0.200"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <Grid>
+        <Grid.Resources>
+            <helper:BindingProxy x:Key="Proxy" Data="{Binding}"/>
+        </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="*"/>
@@ -29,16 +81,47 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type data:Module}">
-                    <!-- I've no idea how to make this command work. I'm just going to try and reskin a button to get the command-->
-                    <!--<cc:ModuleUserControl ModuleName="{Binding Name}" Height="160" Width="200"
-                                          Command="{Binding DataContext.LoadModuleCommand,
-                                          RelativeSource={RelativeSource Mode=FindAncestor,
-                                          AncestorType={x:Type ItemsControl}}}"/>-->
-                    <Button Content="{Binding Name}" Height="50" Width="200" Margin="5"
-                                Command="{Binding DataContext.LoadModuleCommand,
-                                RelativeSource={RelativeSource Mode=FindAncestor,
-                                AncestorType={x:Type ItemsControl}}}"
-                                CommandParameter="{Binding}"/>
+                    <!-- Button For Module -->
+                    <Button x:Name="ModuleButton" Height="50" Width="200" Margin="5"
+                            Command="{Binding DataContext.LoadModuleCommand,
+                            RelativeSource={RelativeSource Mode=FindAncestor,
+                            AncestorType={x:Type ItemsControl}}}"
+                            CommandParameter="{Binding}"
+                            Style="{DynamicResource NoChromeButton}">
+                        <!-- Button Context Menu -->
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Edit"
+                                          Command="{Binding Source={StaticResource Proxy}, Path=Data.EditModuleCommand}"
+                                          CommandParameter="{Binding}"/>
+                                <MenuItem Header="Remove"
+                                          Command="{Binding Source={StaticResource Proxy}, Path=Data.RemoveModuleCommand}"
+                                          CommandParameter="{Binding}"/>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                        
+                        <!-- Content of the button -->
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" FontSize="18"/>
+                            <TextBlock Text="{Binding Description}" FontSize="10"/>
+                        </StackPanel>
+                        <!-- Button Template -->
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="border" Background="{TemplateBinding Background}" 
+                                        Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"
+                                        BorderThickness="2" BorderBrush="Gainsboro">
+                                    <ContentPresenter Content="{TemplateBinding Content}"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="border" Property="BorderBrush" Value="Black"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

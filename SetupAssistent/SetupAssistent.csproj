@@ -59,9 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CustomControls\ModuleUserControl.xaml.cs">
-      <DependentUpon>ModuleUserControl.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Helpers\BindingProxy.cs" />
     <Compile Include="CustomControls\TaskUserControl.xaml.cs">
       <DependentUpon>TaskUserControl.xaml</DependentUpon>
     </Compile>
@@ -99,10 +97,6 @@
     <Compile Include="Views\TasksView.xaml.cs">
       <DependentUpon>TasksView.xaml</DependentUpon>
     </Compile>
-    <Page Include="CustomControls\ModuleUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="CustomControls\TaskUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
