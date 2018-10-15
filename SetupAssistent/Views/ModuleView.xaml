@@ -37,9 +37,9 @@
                         <BeginStoryboard>
                             <Storyboard>
                                 <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
-                                                To="DodgerBlue" From="Transparent" Duration="0:0:0.200"/>
+                                                To="Gainsboro" From="Transparent" Duration="0:0:0.200"/>
                                 <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)"
-                                                To="Gainsboro" From="Black" Duration="0:0:0.200"/>
+                                                To="DarkMagenta" From="Black" Duration="0:0:0.200"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </Trigger.EnterActions>
@@ -47,9 +47,9 @@
                         <BeginStoryboard>
                             <Storyboard>
                                 <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
-                                                To="Transparent" From="DodgerBlue" Duration="0:0:0.200"/>
+                                                To="Transparent" From="Gainsboro" Duration="0:0:0.200"/>
                                 <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)"
-                                                To="Black" From="Gainsboro" Duration="0:0:0.200"/>
+                                                To="Black" From="DarkMagenta" Duration="0:0:0.200"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </Trigger.ExitActions>
@@ -102,7 +102,7 @@
                         
                         <!-- Content of the button -->
                         <StackPanel>
-                            <TextBlock Text="{Binding Name}" FontSize="18"/>
+                            <TextBlock Text="{Binding Name}" FontSize="18" FontWeight="SemiBold"/>
                             <TextBlock Text="{Binding Description}" FontSize="10"/>
                         </StackPanel>
                         <!-- Button Template -->
@@ -115,8 +115,30 @@
                                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <ControlTemplate.Triggers>
+                                    <!-- I'll try to move all animations here or in the style, still working all this out -->
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="border" Property="BorderBrush" Value="Black"/>
+                                        <Setter TargetName="border" Property="BorderBrush" Value="DarkMagenta"/>
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ThicknessAnimation Storyboard.TargetName="border" 
+                                                                        Storyboard.TargetProperty="BorderThickness"
+                                                                        To="5" From="2" Duration="0:0:0.200"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ThicknessAnimation Storyboard.TargetName="border" 
+                                                                        Storyboard.TargetProperty="BorderThickness"
+                                                                        To="2" From="5" Duration="0:0:0.200"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                       
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
