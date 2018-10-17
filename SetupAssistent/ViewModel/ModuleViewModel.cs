@@ -127,9 +127,14 @@ namespace SetupAssistent.ViewModel
                         if(searchedModule.Name.ToString() == module.Name.ToString())
                         {
                             ModuleList.Remove(searchedModule);
+
                             AllModules.modulesList.Clear();
-                            AllModules.modulesList = ModuleList;
-                            WriteModuleDataToXML();
+                            foreach (Module remainingModule in ModuleList)
+                            {
+                                AllModules.modulesList.Add(remainingModule);
+                            }
+
+                            WriteAllModuleDataToXML();
                             break;
                         }
                     }
@@ -158,7 +163,7 @@ namespace SetupAssistent.ViewModel
 
         #region Other Methods
 
-        public void WriteModuleDataToXML()
+        public void WriteAllModuleDataToXML()
         {
             bool saved = false;
             string outputPath = String.Format("C:\\Users\\{0}\\Desktop\\TestFolder\\Modules.xml", Environment.UserName);
