@@ -122,7 +122,15 @@ namespace SetupAssistent.ViewModel
                 MessageBoxResult result = MessageBox.Show(String.Format("Are you sure you want to remove '{0}'",module.Name.ToString()), "Remove Module", MessageBoxButton.YesNo);
                 if(result == MessageBoxResult.Yes)
                 {
-                    MessageBox.Show(String.Format("'{0}' would have been deleted", module.Name.ToString()));
+                    foreach(Module searchedModule in ModuleList)
+                    {
+                        if(searchedModule.Name.ToString() == module.Name.ToString())
+                        {
+                            ModuleList.Remove(searchedModule);
+                            WriteModuleDataToXML();
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -143,6 +151,25 @@ namespace SetupAssistent.ViewModel
             return true;
         }
 
+        #endregion
+
+        #region Other Methods
+        public void WriteModuleDataToXML()
+        {
+            bool saved = false;
+            string outputPath = String.Format("C:\\Users\\{0}\\Desktop\\TestFolder\\Modules.xml", Environment.UserName);
+            using (TextWriter writer = new StreamWriter(outputPath))
+            {
+                XmlSerializer xmlS = new XmlSerializer(typeof(ObservableCollection<Module>));
+                xmlS.Serialize(writer, ModuleList);
+
+                saved = true;
+            }
+            if(!saved)
+            {
+                MessageBox.Show("Something went wrong :(  Modules have not been saved!");
+            }
+        }
         #endregion
     }
 }
