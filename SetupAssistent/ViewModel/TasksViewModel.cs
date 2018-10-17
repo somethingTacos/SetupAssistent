@@ -66,9 +66,17 @@ namespace SetupAssistent.ViewModel
             }
             if(parameter is InstallProgram installProgram)
             {
+                try
+                {
+
                 ProcessStartInfo programTask = new ProcessStartInfo();
                 programTask.FileName = installProgram.ProgramSource;
                 Process.Start(programTask);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
             if(parameter is AddLocalAdmin addLocalAdmin)
             {

@@ -127,6 +127,8 @@ namespace SetupAssistent.ViewModel
                         if(searchedModule.Name.ToString() == module.Name.ToString())
                         {
                             ModuleList.Remove(searchedModule);
+                            AllModules.modulesList.Clear();
+                            AllModules.modulesList = ModuleList;
                             WriteModuleDataToXML();
                             break;
                         }
@@ -143,7 +145,8 @@ namespace SetupAssistent.ViewModel
         {
             if(parameter is Module module)
             {
-                MessageBox.Show(String.Format("'{0}' would launch edit Module View", module.Name.ToString()));
+                MessageBox.Show(String.Format("'{0}' would have been edited", module.Name.ToString()));
+                //I might try to reuse the CreateNewModuleView, but I'm not sure if it would be easier to just create a new view.
             }
         }
         public bool canEditModuleCommand()
@@ -154,6 +157,7 @@ namespace SetupAssistent.ViewModel
         #endregion
 
         #region Other Methods
+
         public void WriteModuleDataToXML()
         {
             bool saved = false;
@@ -161,7 +165,7 @@ namespace SetupAssistent.ViewModel
             using (TextWriter writer = new StreamWriter(outputPath))
             {
                 XmlSerializer xmlS = new XmlSerializer(typeof(ObservableCollection<Module>));
-                xmlS.Serialize(writer, ModuleList);
+                xmlS.Serialize(writer, AllModules.modulesList);
 
                 saved = true;
             }
