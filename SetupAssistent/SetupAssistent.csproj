@@ -72,6 +72,7 @@
     <Compile Include="ViewModel\CreateNewTaskViewModel.cs" />
     <Compile Include="ViewModel\ModuleViewModel.cs" />
     <Compile Include="ViewModel\NavigationViewModel.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\TasksViewModel.cs" />
     <Compile Include="Views\AddLocalAdminView.xaml.cs">
       <DependentUpon>AddLocalAdminView.xaml</DependentUpon>

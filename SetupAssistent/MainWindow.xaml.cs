@@ -31,6 +31,12 @@ namespace SetupAssistent
             this.DataContext = viewmodel;
         }
 
-
+        private void Settings_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Window settingsWindow = new Window();
+            SettingsViewModel settingsVM = new SettingsViewModel();
+            settingsWindow.Content = settingsVM;
+            settingsWindow.ShowDialog();
+        }
     }
 }

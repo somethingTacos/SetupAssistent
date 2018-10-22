@@ -9,25 +9,20 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="600" WindowStartupLocation="CenterScreen"
         MinHeight="400" MinWidth="600">
-    <Window.Resources>
-        <DataTemplate DataType="{x:Type vm:ModuleViewModel}">
-            <views:ModuleView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:TasksViewModel}">
-            <views:TasksView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:CreateNewModuleViewModel}">
-            <views:CreateNewModuleView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:CreateNewTaskViewModel}">
-            <views:CreateNewTaskView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:AddTasksViewModel}">
-            <views:AddTasksView/>
-        </DataTemplate>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="Settings_Button" Content="B1" Grid.Column="0" Grid.Row="0"
+                Click="Settings_Button_Click"/>
 
-    </Window.Resources>
-    <DockPanel LastChildFill="True">
-        <ContentControl x:Name="Pages" DockPanel.Dock="Right" Content="{Binding SelectedViewModel}"/>
-    </DockPanel>
+        <DockPanel LastChildFill="True" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+            <ContentControl x:Name="Pages" DockPanel.Dock="Right" Content="{Binding SelectedViewModel}"/>
+        </DockPanel>
+    </Grid>
 </Window>
