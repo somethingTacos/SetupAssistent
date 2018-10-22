@@ -15,10 +15,11 @@ namespace SetupAssistent.Model
     public class Settings : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
-
+        //Colors
         public Color Theme_MainColor { get; set; }
         public Color Theme_AccentColor { get; set; }
-
+        //Other
+        public bool LimitModuleNameSize { get; set; } = true;
     }
 
 }

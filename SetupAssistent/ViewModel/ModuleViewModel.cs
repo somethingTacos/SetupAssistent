@@ -68,6 +68,18 @@ namespace SetupAssistent.ViewModel
                 }
             }
 
+            foreach (Module tempModule in tempOC_Modules)
+            {
+                if (tempModule.Description.Length > 100)
+                {
+                    tempModule.DescriptionPreview = tempModule.Description.Substring(0, 100) + "...";
+                }
+                else
+                {
+                    tempModule.DescriptionPreview = tempModule.Description;
+                }
+            }
+
             ModuleList = tempOC_Modules;
 
             if (!AllModules.LoadedAtStartup)

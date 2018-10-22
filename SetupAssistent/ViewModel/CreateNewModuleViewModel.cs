@@ -61,43 +61,51 @@ namespace SetupAssistent.ViewModel
             //save data in xml format using xmlserializer.
             if(NewModule.Name != "")
             {
-                bool nameUsed = false;
-                foreach(Module module in AllModules.modulesList)
+                //Check settings for ModuleNameSize limit or something here.
+                if (NewModule.Name.Length > 20)
                 {
-                    if(module.Name == NewModule.Name)
-                    {
-                        nameUsed = true;
-                    }
-                }
-
-                if(!nameUsed)
-                {
-                    bool saved = false;
-                    using (TextWriter writer = new StreamWriter(outputPath))
-                    {
-                        ObservableCollection<Module> tempOC = new ObservableCollection<Module>();
-                        tempOC = AllModules.modulesList;
-                        tempOC.Add(NewModule);
-
-                        XmlSerializer xmlS = new XmlSerializer(typeof(ObservableCollection<Module>));
-                        xmlS.Serialize(writer, tempOC);
-
-                        saved = true;
-                    }
-
-                    if(saved)
-                    {
-                        MessageBox.Show(String.Format("Module '{0}' was saved.", NewModule.Name.ToString()), "Module Saved");  // This will be replaced with a delayed animation in the future. For now this works well enough for confirmation.  <<<------ IMPORTANT
-                        _navigationViewModel.SelectedViewModel = new ModuleViewModel(_navigationViewModel);
-                    }
-                    else
-                    {
-                        MessageBox.Show(String.Format("Something went wroung.{0}Could not save Module.", Environment.NewLine), "Oops  :(", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
+                    MessageBox.Show(String.Format("The name '{0}' is too long. Please shorten the name or disable this feature in settings.", NewModule.Name.ToString()), "Name is too long", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
-                    MessageBox.Show(String.Format("The name '{0}' is currently in use by another module.{1}Please choose another name.", NewModule.Name.ToString(), Environment.NewLine), "Name Already In Use", MessageBoxButton.OK, MessageBoxImage.Error);
+                    bool nameUsed = false;
+                    foreach (Module module in AllModules.modulesList)
+                    {
+                        if (module.Name == NewModule.Name)
+                        {
+                            nameUsed = true;
+                        }
+                    }
+
+                    if (!nameUsed)
+                    {
+                        bool saved = false;
+                        using (TextWriter writer = new StreamWriter(outputPath))
+                        {
+                            ObservableCollection<Module> tempOC = new ObservableCollection<Module>();
+                            tempOC = AllModules.modulesList;
+                            tempOC.Add(NewModule);
+
+                            XmlSerializer xmlS = new XmlSerializer(typeof(ObservableCollection<Module>));
+                            xmlS.Serialize(writer, tempOC);
+
+                            saved = true;
+                        }
+
+                        if (saved)
+                        {
+                            MessageBox.Show(String.Format("Module '{0}' was saved.", NewModule.Name.ToString()), "Module Saved");  // This will be replaced with a delayed animation in the future. For now this works well enough for confirmation.  <<<------ IMPORTANT
+                            _navigationViewModel.SelectedViewModel = new ModuleViewModel(_navigationViewModel);
+                        }
+                        else
+                        {
+                            MessageBox.Show(String.Format("Something went wroung.{0}Could not save Module.", Environment.NewLine), "Oops  :(", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show(String.Format("The name '{0}' is currently in use by another module.{1}Please choose another name.", NewModule.Name.ToString(), Environment.NewLine), "Name Already In Use", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
             }
             else
