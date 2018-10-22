@@ -59,24 +59,9 @@ namespace SetupAssistent.ViewModel
 
         public void InitTaskTypes()
         {
-            //There has to be a better way to do this...
             RunScript tempRS = new RunScript();
-            tempRS.Name = "";
-            tempRS.Description = "";
-            tempRS.ScriptParameters = "";
-            tempRS.ScriptSource = "";
-            tempRS.IsIncluded = false;
-
             InstallProgram tempIP = new InstallProgram();
-            tempIP.Name = "";
-            tempIP.Description = "";
-            tempIP.ProgramSource = "";
-            tempIP.IsIncluded = false;
-
             AddLocalAdmin tempALA = new AddLocalAdmin();
-            tempALA.UserName = "";
-            tempALA.IsIncluded = false;
-
 
             NewRunScript = tempRS;
             NewInstallProgram = tempIP;
@@ -153,9 +138,6 @@ namespace SetupAssistent.ViewModel
                                 if(AllTasks.tasksList.Count == 0)
                                 {
                                     ModuleTasks tasks = new ModuleTasks();
-                                    tasks.ScriptTasks = new ObservableCollection<RunScript>();
-                                    tasks.InstallProgramTasks = new ObservableCollection<InstallProgram>();
-                                    tasks.AddLocalAdminTasks = new ObservableCollection<AddLocalAdmin>();
 
                                     AllTasks.tasksList.Add(tasks);
                                 }
@@ -211,8 +193,6 @@ namespace SetupAssistent.ViewModel
                                 if (AllTasks.tasksList.Count == 0)
                                 {
                                     ModuleTasks tasks = new ModuleTasks();
-                                    tasks.ScriptTasks = new ObservableCollection<RunScript>();
-                                    tasks.InstallProgramTasks = new ObservableCollection<InstallProgram>();
 
                                     AllTasks.tasksList.Add(tasks);
                                 }

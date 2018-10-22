@@ -34,18 +34,12 @@ namespace SetupAssistent.ViewModel
             outputPath = String.Format("C:\\Users\\{0}\\Desktop\\TestFolder\\Modules.xml", userName);
             initNewModule();
         }
-#endregion
+        #endregion
 
         #region InitNewModule
         public void initNewModule()
         {
             Module tempModule = new Module();
-            tempModule.Name = "";
-            tempModule.Description = "";
-            tempModule.ImageSource = "";
-            tempModule.allowRemove = true;
-            tempModule.allowEdit = true;
-            tempModule.TasksList = new ObservableCollection<ModuleTasks>();
 
             NewModule = tempModule;
         }

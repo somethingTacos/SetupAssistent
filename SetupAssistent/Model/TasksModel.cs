@@ -33,9 +33,9 @@ namespace SetupAssistent.Model
             }
         }
 
-        public ObservableCollection<RunScript> ScriptTasks { get; set; }
-        public ObservableCollection<InstallProgram> InstallProgramTasks { get; set; }
-        public ObservableCollection<AddLocalAdmin> AddLocalAdminTasks { get; set; }
+        public ObservableCollection<RunScript> ScriptTasks { get; set; } = new ObservableCollection<RunScript>();
+        public ObservableCollection<InstallProgram> InstallProgramTasks { get; set; } = new ObservableCollection<InstallProgram>();
+        public ObservableCollection<AddLocalAdmin> AddLocalAdminTasks { get; set; } = new ObservableCollection<AddLocalAdmin>();
     }
 
     #region Task Types
@@ -45,11 +45,11 @@ namespace SetupAssistent.Model
     {
         public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
 
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string ScriptSource { get; set; }
-        public string ScriptParameters { get; set; }
-        public bool IsIncluded { get; set; }
+        public string Name { get; set; } = "";
+        public string Description { get; set; } = "";
+        public string ScriptSource { get; set; } = "";
+        public string ScriptParameters { get; set; } = "";
+        public bool IsIncluded { get; set; } = false;
     }
 
     [AddINotifyPropertyChangedInterface]
@@ -57,10 +57,10 @@ namespace SetupAssistent.Model
     {
         public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
 
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string ProgramSource { get; set; }
-        public bool IsIncluded { get; set; }
+        public string Name { get; set; } = "";
+        public string Description { get; set; } = "";
+        public string ProgramSource { get; set; } = "";
+        public bool IsIncluded { get; set; } = false;
     }
 
     [AddINotifyPropertyChangedInterface]
@@ -68,8 +68,8 @@ namespace SetupAssistent.Model
     {
         public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
 
-        public string UserName { get; set; }
-        public bool IsIncluded { get; set; }
+        public string UserName { get; set; } = "";
+        public bool IsIncluded { get; set; } = false;
     }
     #endregion
 

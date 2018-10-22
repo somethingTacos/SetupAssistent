@@ -32,13 +32,14 @@ namespace SetupAssistent.Model
 
         public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
 
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string ImageSource { get; set; }
-        public bool allowRemove { get; set; }
-        public bool allowEdit { get; set; }
+        public string Name { get; set; } = "";
+        public string Description { get; set; } = "";
+        public string DescriptionPreview { get; set; } = "";
+        public string ImageSource { get; set; } = "";
+        public bool allowRemove { get; set; } = true;
+        public bool allowEdit { get; set; } = true;
 
-        public ObservableCollection<ModuleTasks> TasksList { get; set; }
+        public ObservableCollection<ModuleTasks> TasksList { get; set; } = new ObservableCollection<ModuleTasks>();
     }
 
     public static class AllModules
