@@ -51,168 +51,182 @@
         </Grid.RowDefinitions>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
-        <ItemsControl ItemsSource="{Binding ModuleList}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="{x:Type data:Module}">
-                    <!-- Button For Module -->
-                    <Button x:Name="ModuleButton" Height="50" Width="200" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Left"
+            <ItemsControl ItemsSource="{Binding ModuleList}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type data:Module}">
+                        <!-- Button For Module -->
+                        <Button x:Name="ModuleButton" Height="50" Width="200" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Left"
                             HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                             Command="{Binding DataContext.LoadModuleCommand,
                             RelativeSource={RelativeSource Mode=FindAncestor,
                             AncestorType={x:Type ItemsControl}}}"
                             CommandParameter="{Binding}"
                             Style="{DynamicResource NoChromeButton}">
-                        <!-- Button Context Menu -->
-                        <Button.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="Edit"
+                            <!-- Button Context Menu -->
+                            <Button.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Edit"
                                           Command="{Binding Source={StaticResource Proxy}, Path=Data.EditModuleCommand}"
                                           CommandParameter="{Binding}"/>
-                                <MenuItem Header="Remove"
+                                    <MenuItem Header="Remove"
                                           Command="{Binding Source={StaticResource Proxy}, Path=Data.RemoveModuleCommand}"
                                           CommandParameter="{Binding}"/>
-                            </ContextMenu>
-                        </Button.ContextMenu>
-                        
-                         <!--Content of the button-->
-                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="2"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="50"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="2"/>
-                            </Grid.RowDefinitions>
+                                </ContextMenu>
+                            </Button.ContextMenu>
+
+                            <!--Content of the button-->
+                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="2"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="2"/>
+                                </Grid.RowDefinitions>
 
                                 <Rectangle x:Name="TextBacking" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Fill="Transparent"/>
                                 <DockPanel x:Name="ButtonStackPanel" VerticalAlignment="Top" Grid.Column="0" Grid.Row="0" Margin="5 0 0 0"
                                            Width="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
                                            Height="{Binding ActualHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}">
-                                <TextBlock DockPanel.Dock="Top" Text="{Binding Name}" FontSize="18" FontWeight="SemiBold" TextWrapping="Wrap"/>
-                                <TextBlock DockPanel.Dock="Bottom" Text="{Binding DescriptionPreview}" FontSize="10" TextWrapping="Wrap"/>
-                            </DockPanel>
-                            <Image x:Name="ModuleImage" Source="{Binding ImageSource}" Opacity="0" Grid.Column="0" Grid.ColumnSpan="3"
+                                    <TextBlock x:Name="NameBlock" DockPanel.Dock="Top" Text="{Binding Name}" FontSize="18" 
+                                           FontWeight="SemiBold" TextWrapping="Wrap" Margin="10 10 0 0"/>
+                                    <TextBlock x:Name="DescBlock" DockPanel.Dock="Bottom" Text="{Binding DescriptionPreview}"
+                                           FontSize="10" TextWrapping="Wrap" Margin="10"/>
+                                </DockPanel>
+                                <Image x:Name="ModuleImage" Source="{Binding ImageSource}" Opacity="0" Grid.Column="0" Grid.ColumnSpan="3"
                                    Grid.Row="1" Grid.RowSpan="2" RenderOptions.BitmapScalingMode="Fant"/>
 
                             </Grid>
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border x:Name="border" Background="{TemplateBinding Background}" 
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="border" Background="{TemplateBinding Background}" 
                                         Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"
                                         BorderThickness="2" BorderBrush="Gainsboro">
-                                    <ContentPresenter Content="{TemplateBinding Content}"
+                                        <ContentPresenter Content="{TemplateBinding Content}"
                                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    <!--Border animations-->
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Trigger.EnterActions>
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <ThicknessAnimation Storyboard.TargetName="border" 
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <!--Border animations-->
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Trigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ThicknessAnimation Storyboard.TargetName="border" 
                                                                         Storyboard.TargetProperty="BorderThickness"
                                                                         To="1" From="2" Duration="0:0:0.200"/>
 
-                                                    <ColorAnimation Storyboard.TargetName="border"
+                                                        <ColorAnimation Storyboard.TargetName="border"
                                                                     Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
                                                                     To="Orange" From="Gainsboro" Duration="0:0:0.200"/>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </Trigger.EnterActions>
-                                        <Trigger.ExitActions>
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <ThicknessAnimation Storyboard.TargetName="border" 
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.EnterActions>
+                                            <Trigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ThicknessAnimation Storyboard.TargetName="border" 
                                                                         Storyboard.TargetProperty="BorderThickness"
                                                                         To="2" From="1" Duration="0:0:0.200"/>
 
-                                                    <ColorAnimation Storyboard.TargetName="border"
+                                                        <ColorAnimation Storyboard.TargetName="border"
                                                                     Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
                                                                     To="Gainsboro" From="Orange" Duration="0:0:0.200"/>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </Trigger.ExitActions>
-                                    </Trigger>
-                                    <Trigger Property="IsPressed" Value="True">
-                                        <!--Might not use this, idk yet...-->
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Button.Template>
-                        <Button.Triggers>
-                            <!--Event triggers for animations (not border)-->
-                            <EventTrigger RoutedEvent="MouseEnter">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <!--<ThicknessAnimationUsingKeyFrames Storyboard.TargetName="ButtonStackPanel" 
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.ExitActions>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <!--Might not use this, idk yet...-->
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                            <Button.Triggers>
+                                <!--Event triggers for animations (not border)-->
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="NameBlock" 
                                                                           Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
-                                            <SplineThicknessKeyFrame KeyTime="00:00:00.100" Value="0 0 0 0" />
-                                            <SplineThicknessKeyFrame KeyTime="00:00:00.300" Value="0 50 80 0" />
-                                        </ThicknessAnimationUsingKeyFrames>-->
+                                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="10 10 0 0" />
+                                                <SplineThicknessKeyFrame KeyTime="00:00:00.200" Value="0 0 0 0" />
+                                            </ThicknessAnimationUsingKeyFrames>
 
-                                        <DoubleAnimation Storyboard.TargetName="ModuleImage" Storyboard.TargetProperty="Opacity"
-                                                        To="1.0" From="0.0" Duration="0:0:0.400"/>
+                                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="DescBlock" 
+                                                                          Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
+                                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="10" />
+                                                <SplineThicknessKeyFrame KeyTime="00:00:00.200" Value="2" />
+                                            </ThicknessAnimationUsingKeyFrames>
 
-                                        <DoubleAnimation Storyboard.TargetProperty="Height"
-                                                                     To="100" From="50" Duration="0:0:0.200"/>
+                                            <DoubleAnimation Storyboard.TargetName="ModuleImage" Storyboard.TargetProperty="Opacity"
+                                                         To="1.0" From="0.0" Duration="0:0:0.400"/>
 
-                                        <DoubleAnimation Storyboard.TargetProperty="Width"
-                                                                     To="250" From="200" Duration="0:0:0.200"/>
+                                            <DoubleAnimation Storyboard.TargetProperty="Height"
+                                                         To="100" From="50" Duration="0:0:0.200"/>
 
-                                        <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
-                                                                    To="Gainsboro" From="Transparent" Duration="0:0:0.200"/>
+                                            <DoubleAnimation Storyboard.TargetProperty="Width"
+                                                         To="250" From="200" Duration="0:0:0.200"/>
 
-                                        <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)"
-                                                                    To="Gainsboro" From="Black" Duration="0:0:0.200"/>
-                                        
+                                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                                        To="Gainsboro" From="Transparent" Duration="0:0:0.200"/>
+
+                                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)"
+                                                        To="Gainsboro" From="Black" Duration="0:0:0.200"/>
+
                                             <ColorAnimation Storyboard.TargetName="TextBacking"
                                                             Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
-                                                                    To="DodgerBlue" From="Transparent" Duration="0:0:0.200"/>
+                                                            To="DodgerBlue" From="Transparent" Duration="0:0:0.200"/>
                                         </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="MouseLeave">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <!--<ThicknessAnimationUsingKeyFrames Storyboard.TargetName="ButtonStackPanel" 
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="NameBlock" 
                                                                           Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
-                                            <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0 50 80 0" />
-                                            <SplineThicknessKeyFrame KeyTime="00:00:00.200" Value="0 0 0 0" />
-                                        </ThicknessAnimationUsingKeyFrames>-->
+                                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0 0 0 0" />
+                                                <SplineThicknessKeyFrame KeyTime="00:00:00.200" Value="10 10 0 0" />
+                                            </ThicknessAnimationUsingKeyFrames>
 
-                                        <DoubleAnimation Storyboard.TargetName="ModuleImage" Storyboard.TargetProperty="Opacity"
+                                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="DescBlock" 
+                                                                          Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
+                                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0" />
+                                                <SplineThicknessKeyFrame KeyTime="00:00:00.200" Value="10" />
+                                            </ThicknessAnimationUsingKeyFrames>
+
+                                            <DoubleAnimation Storyboard.TargetName="ModuleImage" Storyboard.TargetProperty="Opacity"
                                                         To="0.0" From="1.0" Duration="0:0:0.200"/>
 
-                                        <DoubleAnimation Storyboard.TargetProperty="Height"
+                                            <DoubleAnimation Storyboard.TargetProperty="Height"
                                                                      To="50" From="100" Duration="0:0:0.200"/>
 
-                                        <DoubleAnimation Storyboard.TargetProperty="Width"
+                                            <DoubleAnimation Storyboard.TargetProperty="Width"
                                                                      To="200" From="250" Duration="0:0:0.200"/>
 
-                                        <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
                                                                     To="Transparent" From="Gainsboro" Duration="0:0:0.200"/>
 
-                                        <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)"
+                                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)"
                                                                     To="Black" From="Gainsboro" Duration="0:0:0.200"/>
-                                        
-                                        <ColorAnimation Storyboard.TargetName="TextBacking"
+
+                                            <ColorAnimation Storyboard.TargetName="TextBacking"
                                                             Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
                                                             To="Transparent" From="DodgerBlue" Duration="0:0:0.200"/>
                                         </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </Button.Triggers>
-                    </Button>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Button.Triggers>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </ScrollViewer>
         <Button Content="Add Module" Grid.Column="2" Grid.Row="2" Margin="0 10 0 10"
                 Command="{Binding CreateNewModuleCommand}"/>

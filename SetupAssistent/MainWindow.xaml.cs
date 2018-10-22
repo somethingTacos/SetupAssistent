@@ -36,6 +36,9 @@ namespace SetupAssistent
             Window settingsWindow = new Window();
             SettingsViewModel settingsVM = new SettingsViewModel();
             settingsWindow.Content = settingsVM;
+            settingsWindow.Width = 400;
+            settingsWindow.Height = 300;
+            settingsWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             settingsWindow.ShowDialog();
         }
     }
