@@ -61,7 +61,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="{x:Type data:Module}">
                         <!-- Button For Module -->
-                        <Button x:Name="ModuleButton" Height="50" Width="200" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Left"
+                        <cc:ModuleButton x:Name="ModuleButton" Height="50" Width="200" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Left"
                             HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                             Command="{Binding DataContext.LoadModuleCommand,
                             RelativeSource={RelativeSource Mode=FindAncestor,
@@ -224,7 +224,7 @@
                                     </BeginStoryboard>
                                 </EventTrigger>
                             </Button.Triggers>
-                        </Button>
+                        </cc:ModuleButton>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
