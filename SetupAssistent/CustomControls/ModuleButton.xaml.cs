@@ -20,6 +20,15 @@ namespace SetupAssistent.CustomControls
     /// </summary>
     public partial class ModuleButton : Button
     {
+        public static readonly DependencyProperty IsExpandedProperty =
+            DependencyProperty.Register("IsExpanded", typeof(bool), typeof(ModuleButton), new PropertyMetadata(false));
+
+        public bool IsExpanded
+        {
+            get { return (bool)GetValue(IsExpandedProperty); }
+            set { SetValue(IsExpandedProperty, value); }
+        }
+
         public ModuleButton()
         {
             InitializeComponent();

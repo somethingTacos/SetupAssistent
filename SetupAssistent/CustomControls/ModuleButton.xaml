@@ -7,6 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            <!--Going to see if I can figure out how to move all that button xaml for modules here. That would be nice...-->
+            
     </Grid>
 </Button>
