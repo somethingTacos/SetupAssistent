@@ -98,7 +98,7 @@
                                     <TextBlock x:Name="NameBlock" DockPanel.Dock="Top" Text="{Binding Name}" FontSize="18" 
                                            FontWeight="SemiBold" TextWrapping="Wrap" Margin="10 10 0 0"/>
                                     <TextBlock x:Name="DescBlock" DockPanel.Dock="Bottom" Text="{Binding DescriptionPreview}"
-                                           FontSize="10" TextWrapping="Wrap" Margin="10"/>
+                                           FontSize="10" TextWrapping="Wrap" Margin="10 10 10 10"/>
                                 </DockPanel>
                                 <Image x:Name="ModuleImage" Source="{Binding ImageSource}" Opacity="0" Grid.Column="0" Grid.ColumnSpan="3"
                                    Grid.Row="1" Grid.RowSpan="2" RenderOptions.BitmapScalingMode="Fant"/>
@@ -161,15 +161,15 @@
 
                                             <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="DescBlock" 
                                                                           Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
-                                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="10" />
-                                                <SplineThicknessKeyFrame KeyTime="00:00:00.200" Value="2" />
+                                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="10 10 10 10" />
+                                                <SplineThicknessKeyFrame KeyTime="00:00:00.200" Value="0 0 10 0" />
                                             </ThicknessAnimationUsingKeyFrames>
 
                                             <DoubleAnimation Storyboard.TargetName="ModuleImage" Storyboard.TargetProperty="Opacity"
                                                          To="1.0" From="0.0" Duration="0:0:0.400"/>
 
                                             <DoubleAnimation Storyboard.TargetProperty="Height"
-                                                         To="100" From="50" Duration="0:0:0.200"/>
+                                                         To="150" From="50" Duration="0:0:0.200"/>
 
                                             <DoubleAnimation Storyboard.TargetProperty="Width"
                                                          To="250" From="200" Duration="0:0:0.200"/>
@@ -197,15 +197,15 @@
 
                                             <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="DescBlock" 
                                                                           Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
-                                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0" />
-                                                <SplineThicknessKeyFrame KeyTime="00:00:00.200" Value="10" />
+                                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0 0 10 0" />
+                                                <SplineThicknessKeyFrame KeyTime="00:00:00.200" Value="10 10 10 10" />
                                             </ThicknessAnimationUsingKeyFrames>
 
                                             <DoubleAnimation Storyboard.TargetName="ModuleImage" Storyboard.TargetProperty="Opacity"
                                                         To="0.0" From="1.0" Duration="0:0:0.200"/>
 
                                             <DoubleAnimation Storyboard.TargetProperty="Height"
-                                                                     To="50" From="100" Duration="0:0:0.200"/>
+                                                                     To="50" From="150" Duration="0:0:0.200"/>
 
                                             <DoubleAnimation Storyboard.TargetProperty="Width"
                                                                      To="200" From="250" Duration="0:0:0.200"/>
