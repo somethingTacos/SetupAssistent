@@ -310,11 +310,6 @@
                                                  Duration="0:0:0.5">
                                                 <DiscreteBooleanKeyFrame Value="True" KeyTime="100%"/>
                                             </BooleanAnimationUsingKeyFrames>
-                                            <BooleanAnimationUsingKeyFrames
-                                                 Storyboard.TargetProperty="IsCollapsed"
-                                                 Duration="0:0:0.1">
-                                                <DiscreteBooleanKeyFrame Value="False" KeyTime="100%"/>
-                                            </BooleanAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
@@ -325,11 +320,6 @@
                                                  Storyboard.TargetProperty="IsExpanded"
                                                  Duration="0:0:0.1">
                                                 <DiscreteBooleanKeyFrame Value="False" KeyTime="0%"/>
-                                            </BooleanAnimationUsingKeyFrames>
-                                            <BooleanAnimationUsingKeyFrames
-                                                 Storyboard.TargetProperty="IsCollapsed"
-                                                 Duration="0:0:0.1">
-                                                <DiscreteBooleanKeyFrame Value="True" KeyTime="100%"/>
                                             </BooleanAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </BeginStoryboard>

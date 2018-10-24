@@ -18,14 +18,5 @@ namespace SetupAssistent.CustomControls
             get { return (bool)GetValue(IsExpandedProperty); }
             set { SetValue(IsExpandedProperty, value); }
         }
-
-        public static readonly DependencyProperty IsCollaspedProperty =
-            DependencyProperty.Register("IsCollapsed", typeof(bool), typeof(ModuleButton), new PropertyMetadata(false));
-
-        public bool IsCollapsed
-        {
-            get { return (bool)GetValue(IsCollaspedProperty); }
-            set { SetValue(IsCollaspedProperty, value); }
-        }
     }
 }
