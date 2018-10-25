@@ -13,11 +13,6 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="16"/>
         </Style>
-        <Style x:Key="StandardBox" TargetType="{x:Type TextBox}">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Height" Value="25"/>
-        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -35,6 +30,7 @@
         <!-- UserName -->
         <TextBlock Text="Type the username of the Active Directory user below." Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
         <TextBlock Text="User Name:" Grid.Column="1" Grid.Row="2"/>
-        <TextBox Style="{StaticResource StandardBox}" Grid.Column="2" Grid.Row="2"/>
+        <TextBox Style="{StaticResource GenericTextBox}" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" Height="25"
+                 VerticalContentAlignment="Center"/>
     </Grid>
 </UserControl>
