@@ -178,21 +178,21 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="BorderBrush" Value="Gainsboro"/>
-            <Setter Property="BorderThickness" Value="0 0 0 2"/>
+            <Setter Property="BorderThickness" Value="0 0 0 3"/>
             <Style.Triggers>
                 <Trigger Property="IsKeyboardFocused" Value="True">
                     <Trigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="0 0 0 1" From="0 0 0 2" Duration="0:0:0.200"/>
-                                <ColorAnimation Storyboard.TargetProperty="(TextBox.BorderBrush).(SolidColorBrush.Color)" To="DodgerBlue" From="DimGray" Duration="0:0:0.200"/>
+                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="0 0 0 1" From="0 0 0 3" Duration="0:0:0.200"/>
+                                <ColorAnimation Storyboard.TargetProperty="(TextBox.BorderBrush).(SolidColorBrush.Color)" To="DodgerBlue" From="Gainsboro" Duration="0:0:0.200"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </Trigger.EnterActions>
                     <Trigger.ExitActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="0 0 0 2" From="0 0 0 1" Duration="0:0:0.200"/>
+                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="0 0 0 3" From="0 0 0 1" Duration="0:0:0.200"/>
                                 <ColorAnimation Storyboard.TargetProperty="(TextBox.BorderBrush).(SolidColorBrush.Color)" To="Gainsboro" From="DodgerBlue" Duration="0:0:0.200"/>
                             </Storyboard>
                         </BeginStoryboard>
@@ -205,21 +205,21 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="BorderBrush" Value="Gainsboro"/>
-            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderThickness" Value="3"/>
             <Style.Triggers>
                 <Trigger Property="IsFocused" Value="True">
                     <Trigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="1" From="2" Duration="0:0:0.200"/>
-                                <ColorAnimation Storyboard.TargetProperty="(TextBox.BorderBrush).(SolidColorBrush.Color)" To="DodgerBlue" From="DimGray" Duration="0:0:0.200"/>
+                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="1" From="3" Duration="0:0:0.200"/>
+                                <ColorAnimation Storyboard.TargetProperty="(TextBox.BorderBrush).(SolidColorBrush.Color)" To="DodgerBlue" From="Gainsboro" Duration="0:0:0.200"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </Trigger.EnterActions>
                     <Trigger.ExitActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="2" From="1" Duration="0:0:0.200"/>
+                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="3" From="1" Duration="0:0:0.200"/>
                                 <ColorAnimation Storyboard.TargetProperty="(TextBox.BorderBrush).(SolidColorBrush.Color)" To="Gainsboro" From="DodgerBlue" Duration="0:0:0.200"/>
                             </Storyboard>
                         </BeginStoryboard>
