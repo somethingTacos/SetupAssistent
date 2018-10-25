@@ -75,8 +75,8 @@
         </ContentControl>
 
         <Button Content="Save Task" Grid.Column="4" Grid.Row="5" Margin="5 10 5 10"
-                Command="{Binding SaveCommand}"/>
+                Command="{Binding SaveCommand}" Style="{StaticResource GenericSaveButton}"/>
         <Button Content="Cancel" Grid.Column="5" Grid.Row="5" Margin="5 10 5 10"
-                Command="{Binding CancelCommand}"/>
+                Command="{Binding CancelCommand}" Style="{StaticResource GenericCancelButton}"/>
     </Grid>
 </UserControl>

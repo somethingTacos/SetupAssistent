@@ -42,7 +42,9 @@
         <TextBlock Text="Description" Grid.Column="1" Grid.Row="3" VerticalAlignment="Bottom" FontSize="18" Grid.ColumnSpan="2"/>
         <TextBox Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="4" Margin="10" TextWrapping="Wrap" Text="{Binding NewModule.Description}"/>
         <!-- Save & Cancel Button -->
-        <Button Content="Save" Grid.Column="3" Grid.Row="5" Margin="5 10 5 10" Command="{Binding SaveCommand}"/>
-        <Button Content="Cancel" Grid.Column="4" Grid.Row="5" Margin="5 10 5 10" Command="{Binding CancelCommand}"/>
+        <Button Content="Save" Grid.Column="3" Grid.Row="5" Margin="5 10 5 10" Command="{Binding SaveCommand}" 
+                Style="{StaticResource GenericSaveButton}"/>
+        <Button Content="Cancel" Grid.Column="4" Grid.Row="5" Margin="5 10 5 10" Command="{Binding CancelCommand}"
+                Style="{StaticResource GenericCancelButton}"/>
     </Grid>
 </UserControl>

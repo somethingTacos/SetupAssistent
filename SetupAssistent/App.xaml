@@ -95,5 +95,87 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--Generic Save Button-->
+        <Style x:Key="GenericSaveButton" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="ForestGreen"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="Gainsboro"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid x:Name="Chrome" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                            <Border x:Name="border" Background="{TemplateBinding Background}" 
+                                        Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"
+                                        BorderThickness="0 0 0 3" BorderBrush="DarkGreen">
+                                <ContentPresenter Content="{TemplateBinding Content}"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD"/>
+                                <Setter Property="Opacity" TargetName="Chrome" Value="0.5"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <!--<Setter Property="Background" Value="DarkSeaGreen"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="ForestGreen"/>-->
+                                <Setter Property="Foreground" Value="MintCream"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="BorderThickness" Value="0 0 0 0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--Generic Cancel Button-->
+        <Style x:Key="GenericCancelButton" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Crimson"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="Gainsboro"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid x:Name="Chrome" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                            <Border x:Name="border" Background="{TemplateBinding Background}" 
+                                        Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"
+                                        BorderThickness="0 0 0 3" BorderBrush="DarkRed">
+                                <ContentPresenter Content="{TemplateBinding Content}"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD"/>
+                                <Setter Property="Opacity" TargetName="Chrome" Value="0.5"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <!--<Setter Property="Background" Value="IndianRed"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="Red"/>-->
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="BorderThickness" Value="0 0 0 0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--Generic TextBox-->
+        <Style x:Key="GenericTextBox" TargetType="{x:Type TextBox}">
+            
+        </Style>
     </Application.Resources>
 </Application>

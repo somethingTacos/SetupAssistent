@@ -48,12 +48,8 @@
         </Button>
         <!--Script Parameters-->
         <TextBlock Text="Script Parameters:" Grid.Column="1" Grid.Row="3"/>
-        <TextBox Text="{Binding NewRunScript.ScriptParameters}" Grid.Column="2" Grid.Row="3" Style="{StaticResource StandardBox}"/>
-        <Button Grid.Column="3" Grid.Row="3" Style="{StaticResource GenericButton}" HorizontalAlignment="Left" VerticalAlignment="Center"
-                Margin="5 10 5 10" MinHeight="25" MinWidth="50"
-                Command="{Binding HelpCommand}">
-           What is this?
-        </Button>
+        <TextBox Text="{Binding NewRunScript.ScriptParameters}" Grid.Column="2" Grid.Row="3" Style="{StaticResource StandardBox}"
+                 ToolTip="Command line parameters to pass to the script. Theses are passed 'as is'."/>
         <!--Description-->
         <TextBlock Text="Description:" Grid.Column="1" Grid.Row="4" VerticalAlignment="Bottom"/>
         <TextBox Text="{Binding NewRunScript.Description}" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="3" Margin="5" TextWrapping="Wrap"/>
