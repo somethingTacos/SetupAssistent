@@ -28,7 +28,7 @@ namespace SetupAssistent.ViewModel
         private readonly NavigationViewModel _navigationViewModel;
         public string CurrentModuleName { get; set; }
         public string userName = Environment.UserName;
-        public string outputPath = string.Empty;
+        public string TasksOutputPath = string.Empty;
 
         #endregion
 
@@ -46,7 +46,7 @@ namespace SetupAssistent.ViewModel
             CurrentTaskType = new TaskTypeIndex();
             CurrentTaskType.SelectedTaskTypeIndex = 0;
             //This will be a setting later
-            outputPath = String.Format("C:\\Users\\{0}\\Desktop\\TestFolder\\Tasks.xml", userName);
+            TasksOutputPath = AllSettings.settings[0].outputFilePath + "\\Tasks.xml";
 
             InitTaskTypes();
         }
@@ -129,7 +129,7 @@ namespace SetupAssistent.ViewModel
                         if (NewRunScript.Name.ToString() != "" && NewRunScript.ScriptSource.ToString() != "" && File.Exists(NewRunScript.ScriptSource.ToString()))
                         {
 
-                            using (TextWriter writer = new StreamWriter(outputPath))
+                            using (TextWriter writer = new StreamWriter(TasksOutputPath))
                             {
                                 ObservableCollection<ModuleTasks> tempOC = new ObservableCollection<ModuleTasks>();
 
@@ -184,7 +184,7 @@ namespace SetupAssistent.ViewModel
                         if (NewInstallProgram.Name.ToString() != "" && NewInstallProgram.ProgramSource.ToString() != "" && File.Exists(NewInstallProgram.ProgramSource.ToString()))
                         {
 
-                            using (TextWriter writer = new StreamWriter(outputPath))
+                            using (TextWriter writer = new StreamWriter(TasksOutputPath))
                             {
                                 ObservableCollection<ModuleTasks> tempOC = new ObservableCollection<ModuleTasks>();
 

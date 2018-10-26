@@ -101,9 +101,9 @@ namespace SetupAssistent.ViewModel
                 {
                     bool saved = false;
                     //temporary variable, will remove this later.
-                    string outputPath = String.Format("C:\\Users\\{0}\\Desktop\\TestFolder\\Modules.xml", Environment.UserName);
+                    string ModulesOutputPath = AllSettings.settings[0].outputFilePath + "\\Modules";
 
-                    using (TextWriter writer = new StreamWriter(outputPath))
+                    using (TextWriter writer = new StreamWriter(ModulesOutputPath))
                     {
                         XmlSerializer xmlS = new XmlSerializer(typeof(ObservableCollection<Module>));
                         xmlS.Serialize(writer, AllModules.modulesList);

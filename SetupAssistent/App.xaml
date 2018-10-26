@@ -42,7 +42,7 @@
 
                             <Border x:Name="border" Background="{TemplateBinding Background}" 
                                         Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"
-                                        BorderThickness="0 0 0 3" BorderBrush="DarkBlue">
+                                        BorderThickness="0 0 0 3" BorderBrush="RoyalBlue">
                                 <ContentPresenter Content="{TemplateBinding Content}"
                                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
@@ -54,7 +54,7 @@
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="DeepSkyBlue"/>
-                                <Setter TargetName="border" Property="BorderBrush" Value="Blue"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="CadetBlue"/>
                                 <Setter Property="Foreground" Value="Azure"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
@@ -122,8 +122,6 @@
                                 <Setter Property="Opacity" TargetName="Chrome" Value="0.5"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <!--<Setter Property="Background" Value="DarkSeaGreen"/>
-                                <Setter TargetName="border" Property="BorderBrush" Value="ForestGreen"/>-->
                                 <Setter Property="Foreground" Value="MintCream"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
@@ -161,8 +159,6 @@
                                 <Setter Property="Opacity" TargetName="Chrome" Value="0.5"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <!--<Setter Property="Background" Value="IndianRed"/>
-                                <Setter TargetName="border" Property="BorderBrush" Value="Red"/>-->
                                 <Setter Property="Foreground" Value="White"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">

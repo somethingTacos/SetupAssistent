@@ -7,6 +7,17 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="SettingsView"  FontSize="20"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Output Path"  FontSize="20" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="2" Grid.Row="0" Style="{StaticResource GenericTextBox}"
+                 VerticalContentAlignment="Center" Margin="0 0 10 0"/>
     </Grid>
 </UserControl>

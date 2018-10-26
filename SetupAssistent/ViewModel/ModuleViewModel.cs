@@ -23,6 +23,7 @@ namespace SetupAssistent.ViewModel
         public string userName = Environment.UserName.ToString();
         public string ModulesFile = string.Empty;
         public string TasksFile = string.Empty;
+        public string SettingsFolder = string.Empty;
 
         private readonly NavigationViewModel _navigationViewModel;
         #endregion
@@ -36,8 +37,7 @@ namespace SetupAssistent.ViewModel
             RemoveModuleCommand = new MyICommand(onRemoveModuleCommand, canRemoveModuleCommand);
             EditModuleCommand = new MyICommand(onEditModuleCommand, canEditModuleCommand);
             //These paths are just for testing. I'll have these be settable later in a settings view.
-            ModulesFile = String.Format("C:\\Users\\{0}\\Desktop\\TestFolder\\Modules.xml", userName);
-            TasksFile = String.Format("C:\\Users\\{0}\\Desktop\\TestFolder\\Tasks.xml", userName);
+            SettingsFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\SetupAssistant";
             LoadXMLData();
         }
         #endregion
@@ -45,8 +45,53 @@ namespace SetupAssistent.ViewModel
         #region LoadData
         public void LoadXMLData()
         {
+            string SettingsFile = SettingsFolder + "\\Settings.xml";
             ObservableCollection<Module> tempOC_Modules = new ObservableCollection<Module>();
             ObservableCollection<ModuleTasks> tempOC_Tasks = new ObservableCollection<ModuleTasks>();
+            ObservableCollection<Settings> tempOC_Settings = new ObservableCollection<Settings>();
+
+            if (!Directory.Exists(SettingsFolder))
+            {
+                Directory.CreateDirectory(SettingsFolder);
+            }
+
+            if (File.Exists(SettingsFile))
+            {
+                XmlSerializer xmlS = new XmlSerializer(typeof(ObservableCollection<Settings>));
+
+                using (TextReader reader = new StreamReader(SettingsFile))
+                {
+                    tempOC_Settings = (ObservableCollection<Settings>)xmlS.Deserialize(reader);
+                }
+            }
+            else
+            {
+                Settings defaultSettings = new Settings();
+                defaultSettings.outputFilePath = SettingsFolder;
+                tempOC_Settings.Add(defaultSettings);
+                ModulesFile = SettingsFolder.ToString() + "\\Modules.xml";
+                TasksFile = SettingsFolder.ToString() + "\\Tasks.xml";
+
+                XmlSerializer xmlS = new XmlSerializer(typeof(ObservableCollection<Settings>));
+
+                using (TextWriter writer = new StreamWriter(SettingsFile))
+                {
+                    xmlS.Serialize(writer, tempOC_Settings);
+                }
+
+                using (TextReader reader = new StreamReader(SettingsFile))
+                {
+                    tempOC_Settings = (ObservableCollection<Settings>)xmlS.Deserialize(reader);
+                }
+            }
+
+
+            if (tempOC_Settings[0].outputFilePath.ToString() != "")
+            {
+                ModulesFile = tempOC_Settings[0].outputFilePath.ToString() + "\\Modules.xml";
+                TasksFile = tempOC_Settings[0].outputFilePath.ToString() + "\\Tasks.xml";
+            }
+        
 
             if (File.Exists(ModulesFile))
             {
@@ -98,6 +143,15 @@ namespace SetupAssistent.ViewModel
                     AllTasks.tasksList.Add(tasks);
                 }
                 AllTasks.LoadedAtStartup = true;
+            }
+
+            if (!AllSettings.LoadedAtStartup)
+            {
+                foreach (Settings setting in tempOC_Settings)
+                {
+                    AllSettings.settings.Add(setting);
+                }
+                AllSettings.LoadedAtStartup = true;
             }
         }
         #endregion
@@ -178,8 +232,8 @@ namespace SetupAssistent.ViewModel
         public void WriteAllModuleDataToXML()
         {
             bool saved = false;
-            string outputPath = String.Format("C:\\Users\\{0}\\Desktop\\TestFolder\\Modules.xml", Environment.UserName);
-            using (TextWriter writer = new StreamWriter(outputPath))
+            string ModulesOutputPath = AllSettings.settings[0].outputFilePath + "\\Modules.xml";
+            using (TextWriter writer = new StreamWriter(ModulesOutputPath))
             {
                 XmlSerializer xmlS = new XmlSerializer(typeof(ObservableCollection<Module>));
                 xmlS.Serialize(writer, AllModules.modulesList);

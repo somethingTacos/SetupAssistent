@@ -20,7 +20,7 @@ namespace SetupAssistent.ViewModel
         public MyICommand PicturePickerCommand { get; set; }
         private readonly NavigationViewModel _navigationViewModel;
         public string userName = Environment.UserName.ToString();
-        public string outputPath = string.Empty;
+        public string ModuleOutputFile = string.Empty;
         #endregion
 
         #region Default Constructor
@@ -31,7 +31,7 @@ namespace SetupAssistent.ViewModel
             SaveCommand = new MyICommand(onSaveCommand, canSaveCommand);
             PicturePickerCommand = new MyICommand(onPicturePickerCommand, canPicturePickerCommand);
             //output path will be set in settings later... I should propbably work on that.
-            outputPath = String.Format("C:\\Users\\{0}\\Desktop\\TestFolder\\Modules.xml", userName);
+            ModuleOutputFile = AllSettings.settings[0].outputFilePath + "\\Modules.xml";
             initNewModule();
         }
         #endregion
@@ -79,27 +79,36 @@ namespace SetupAssistent.ViewModel
 
                     if (!nameUsed)
                     {
-                        bool saved = false;
-                        using (TextWriter writer = new StreamWriter(outputPath))
+                        try
                         {
-                            ObservableCollection<Module> tempOC = new ObservableCollection<Module>();
-                            tempOC = AllModules.modulesList;
-                            tempOC.Add(NewModule);
+                            
+                            bool saved = false;
 
-                            XmlSerializer xmlS = new XmlSerializer(typeof(ObservableCollection<Module>));
-                            xmlS.Serialize(writer, tempOC);
+                            using (TextWriter writer = new StreamWriter(ModuleOutputFile))
+                            {
+                                ObservableCollection<Module> tempOC = new ObservableCollection<Module>();
+                                tempOC = AllModules.modulesList;
+                                tempOC.Add(NewModule);
 
-                            saved = true;
+                                XmlSerializer xmlS = new XmlSerializer(typeof(ObservableCollection<Module>));
+                                xmlS.Serialize(writer, tempOC);
+
+                                saved = true;
+                            }
+
+                            if (saved)
+                            {
+                                MessageBox.Show(String.Format("Module '{0}' was saved.", NewModule.Name.ToString()), "Module Saved");  // This will be replaced with a delayed animation in the future. For now this works well enough for confirmation.  <<<------ IMPORTANT
+                                _navigationViewModel.SelectedViewModel = new ModuleViewModel(_navigationViewModel);
+                            }
+                            else
+                            {
+                                MessageBox.Show(String.Format("Something went wroung.{0}Could not save Module.", Environment.NewLine), "Oops  :(", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
                         }
-
-                        if (saved)
+                        catch (Exception ex)
                         {
-                            MessageBox.Show(String.Format("Module '{0}' was saved.", NewModule.Name.ToString()), "Module Saved");  // This will be replaced with a delayed animation in the future. For now this works well enough for confirmation.  <<<------ IMPORTANT
-                            _navigationViewModel.SelectedViewModel = new ModuleViewModel(_navigationViewModel);
-                        }
-                        else
-                        {
-                            MessageBox.Show(String.Format("Something went wroung.{0}Could not save Module.", Environment.NewLine), "Oops  :(", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show(ex.Message);
                         }
                     }
                     else

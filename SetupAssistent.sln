@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SetupAssistent", "SetupAssistent\SetupAssistent.csproj", "{5B36F8DD-DECB-452E-AC39-53BEC5D9F491}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SetupAssistant", "SetupAssistent\SetupAssistant.csproj", "{5B36F8DD-DECB-452E-AC39-53BEC5D9F491}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +18,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D201E245-E327-4E46-9F29-450A08332197}
 	EndGlobalSection
 EndGlobal
