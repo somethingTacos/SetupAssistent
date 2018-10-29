@@ -59,10 +59,17 @@ namespace SetupAssistent.ViewModel
         {
             if(parameter is RunScript runScript)
             {
-                ProcessStartInfo scriptTask = new ProcessStartInfo();
-                scriptTask.FileName = runScript.ScriptSource;
-                scriptTask.Arguments = runScript.ScriptParameters;
-                Process.Start(scriptTask);
+                try
+                {
+                    ProcessStartInfo scriptTask = new ProcessStartInfo();
+                    scriptTask.FileName = runScript.ScriptSource;
+                    scriptTask.Arguments = runScript.ScriptParameters;
+                    Process.Start(scriptTask);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
             if(parameter is InstallProgram installProgram)
             {

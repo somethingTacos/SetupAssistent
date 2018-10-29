@@ -17,18 +17,38 @@ namespace SetupAssistent.ViewModel
         public SettingsViewModel()
         {
             SaveCommand = new MyICommand(onSaveCommand, canSaveCommand);
-            settings = AllSettings.settings[0];
+            InitSettings();
         }
         #endregion
 
         #region Commands Code
         public void onSaveCommand(object parameter)
         {
-            MessageBox.Show("Testing Save Command");
+            /* -Set the new save location to AllSettings
+             * -Save AllSettings to xml file in appdata
+             * -Copy modules and tasks xmls if they exist to new location
+             * -Confirm move succeeded, then remove old files (the old directory can be removed if it is emtpy after the old xml files are removed)
+             * 
+             * In the future, I'll need to move packed files if any exist.
+             */
+
+
+
+            MessageBox.Show(String.Format("S output: {1}{0}AS Ouput: {2}", Environment.NewLine, settings.outputFilePath, AllSettings.settings[0].outputFilePath));
         }
         public bool canSaveCommand()
         {
             return true;
+        }
+        #endregion
+
+        #region Other Methods
+        public void InitSettings()
+        {
+            Settings tempSettings = new Settings();
+            tempSettings.outputFilePath = AllSettings.settings[0].outputFilePath.ToString();
+
+            settings = tempSettings;
         }
         #endregion
     }

@@ -36,6 +36,8 @@ namespace SetupAssistent
             Window settingsWindow = new Window();
             SettingsViewModel settingsVM = new SettingsViewModel();
             settingsWindow.Content = settingsVM;
+            settingsWindow.MinWidth = 500;
+            settingsWindow.MinHeight = 400;
             settingsWindow.Width = 500;
             settingsWindow.Height = 400;
             settingsWindow.Title = "Settings";
