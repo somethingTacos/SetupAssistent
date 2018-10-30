@@ -34,6 +34,12 @@
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
 
+        <!--Not sure why it was giving me issues eailer, but maybe it was a fluck. Strange...-->
+        <cc:SaveSettingsStackPanel Orientation="Horizontal">
+            <TextBlock/>
+            <Button/>
+        </cc:SaveSettingsStackPanel>
+
         <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" Style="{StaticResource SaveStackPanelStyle}">
             <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" FontSize="20" Foreground="Gainsboro" Margin="10"
                    TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center">

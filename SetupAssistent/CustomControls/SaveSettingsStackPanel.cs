@@ -9,13 +9,13 @@ namespace SetupAssistent.CustomControls
 {
     public class SaveSettingsStackPanel : System.Windows.Controls.StackPanel
     {
-        public static readonly DependencyProperty SettingsUpdatedProperty =
-            DependencyProperty.Register("SettingsUpdated", typeof(bool), typeof(SaveSettingsStackPanel), new PropertyMetadata(false));
+        public static readonly DependencyProperty SettingsChangedProperty =
+            DependencyProperty.Register("SettingsChanged", typeof(bool), typeof(SaveSettingsStackPanel), new PropertyMetadata(false));
 
-        public bool SettingsUpdated
+        public bool SettingsChanged
         {
-            get { return (bool)GetValue(SettingsUpdatedProperty); }
-            set { SetValue(SettingsUpdatedProperty, value); }
+            get { return (bool)GetValue(SettingsChangedProperty); }
+            set { SetValue(SettingsChangedProperty, value); }
         }
     }
 }
