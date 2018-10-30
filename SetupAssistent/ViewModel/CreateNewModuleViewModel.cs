@@ -31,7 +31,7 @@ namespace SetupAssistent.ViewModel
             SaveCommand = new MyICommand(onSaveCommand, canSaveCommand);
             PicturePickerCommand = new MyICommand(onPicturePickerCommand, canPicturePickerCommand);
             //output path will be set in settings later... I should propbably work on that.
-            ModuleOutputFile = AllSettings.settings[0].outputFilePath + "\\Modules.xml";
+            ModuleOutputFile = AllSettings.settings[0].OutputFilePath + "\\Modules.xml";
             initNewModule();
         }
         #endregion

@@ -23,7 +23,6 @@ namespace SetupAssistent.ViewModel
         public string userName = Environment.UserName.ToString();
         public string ModulesFile = string.Empty;
         public string TasksFile = string.Empty;
-        public string SettingsFolder = string.Empty;
 
         private readonly NavigationViewModel _navigationViewModel;
         #endregion
@@ -37,7 +36,6 @@ namespace SetupAssistent.ViewModel
             RemoveModuleCommand = new MyICommand(onRemoveModuleCommand, canRemoveModuleCommand);
             EditModuleCommand = new MyICommand(onEditModuleCommand, canEditModuleCommand);
             //These paths are just for testing. I'll have these be settable later in a settings view.
-            SettingsFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\SetupAssistant";
             LoadXMLData();
         }
         #endregion
@@ -45,21 +43,20 @@ namespace SetupAssistent.ViewModel
         #region LoadData
         public void LoadXMLData()
         {
-            string SettingsFile = SettingsFolder + "\\Settings.xml";
             ObservableCollection<Module> tempOC_Modules = new ObservableCollection<Module>();
             ObservableCollection<ModuleTasks> tempOC_Tasks = new ObservableCollection<ModuleTasks>();
             ObservableCollection<Settings> tempOC_Settings = new ObservableCollection<Settings>();
 
-            if (!Directory.Exists(SettingsFolder))
+            if (!Directory.Exists(AllSettings.SettingsFolder))
             {
-                Directory.CreateDirectory(SettingsFolder);
+                Directory.CreateDirectory(AllSettings.SettingsFolder);
             }
 
-            if (File.Exists(SettingsFile))
+            if (File.Exists(AllSettings.SettingsFile))
             {
                 XmlSerializer xmlS = new XmlSerializer(typeof(ObservableCollection<Settings>));
 
-                using (TextReader reader = new StreamReader(SettingsFile))
+                using (TextReader reader = new StreamReader(AllSettings.SettingsFile))
                 {
                     tempOC_Settings = (ObservableCollection<Settings>)xmlS.Deserialize(reader);
                 }
@@ -67,29 +64,29 @@ namespace SetupAssistent.ViewModel
             else
             {
                 Settings defaultSettings = new Settings();
-                defaultSettings.outputFilePath = SettingsFolder;
+                defaultSettings.OutputFilePath = AllSettings.SettingsFolder;
                 tempOC_Settings.Add(defaultSettings);
-                ModulesFile = SettingsFolder.ToString() + "\\Modules.xml";
-                TasksFile = SettingsFolder.ToString() + "\\Tasks.xml";
+                ModulesFile = AllSettings.SettingsFolder.ToString() + "\\Modules.xml";
+                TasksFile = AllSettings.SettingsFolder.ToString() + "\\Tasks.xml";
 
                 XmlSerializer xmlS = new XmlSerializer(typeof(ObservableCollection<Settings>));
 
-                using (TextWriter writer = new StreamWriter(SettingsFile))
+                using (TextWriter writer = new StreamWriter(AllSettings.SettingsFile))
                 {
                     xmlS.Serialize(writer, tempOC_Settings);
                 }
 
-                using (TextReader reader = new StreamReader(SettingsFile))
+                using (TextReader reader = new StreamReader(AllSettings.SettingsFile))
                 {
                     tempOC_Settings = (ObservableCollection<Settings>)xmlS.Deserialize(reader);
                 }
             }
 
 
-            if (tempOC_Settings[0].outputFilePath.ToString() != "")
+            if (tempOC_Settings[0].OutputFilePath.ToString() != "")
             {
-                ModulesFile = tempOC_Settings[0].outputFilePath.ToString() + "\\Modules.xml";
-                TasksFile = tempOC_Settings[0].outputFilePath.ToString() + "\\Tasks.xml";
+                ModulesFile = tempOC_Settings[0].OutputFilePath.ToString() + "\\Modules.xml";
+                TasksFile = tempOC_Settings[0].OutputFilePath.ToString() + "\\Tasks.xml";
             }
         
 
@@ -232,7 +229,7 @@ namespace SetupAssistent.ViewModel
         public void WriteAllModuleDataToXML()
         {
             bool saved = false;
-            string ModulesOutputPath = AllSettings.settings[0].outputFilePath + "\\Modules.xml";
+            string ModulesOutputPath = AllSettings.settings[0].OutputFilePath + "\\Modules.xml";
             using (TextWriter writer = new StreamWriter(ModulesOutputPath))
             {
                 XmlSerializer xmlS = new XmlSerializer(typeof(ObservableCollection<Module>));

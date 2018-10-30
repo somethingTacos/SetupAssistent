@@ -4,8 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SetupAssistent.Views"
+             xmlns:cc="clr-namespace:SetupAssistent.CustomControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="SaveStackPanelStyle" TargetType="{x:Type StackPanel}">
+            <Setter Property="Height" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="Background" Value="RoyalBlue"/>
+            <Style.Triggers>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5"/>
@@ -16,17 +27,24 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="5"/>
-            <RowDefinition Height="45"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="45"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="45"/>
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="Output Path"  FontSize="20" VerticalAlignment="Center"/>
-        <TextBox Text="{Binding settings.outputFilePath}" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="3"
+
+        <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" Style="{StaticResource SaveStackPanelStyle}">
+            <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" FontSize="20" Foreground="Gainsboro" Margin="10"
+                   TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center">
+            Settings have <Bold><Underline>NOT</Underline></Bold> been saved yet!
+            </TextBlock>
+            <Button Content="Save" Width="80" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Command="{Binding SaveCommand}" Style="{StaticResource GenericSaveButton}" Margin="10 0 10 0"/>
+        </StackPanel>
+        <TextBlock Grid.Column="1" Grid.Row="2" Text="Output Path"  FontSize="20" VerticalAlignment="Center"/>
+        <TextBox Text="{Binding settings.outputFilePath}" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="3"
                  Style="{StaticResource GenericTextBox}"
                  VerticalContentAlignment="Center" Margin="0 0 10 0"/>
-        <Button Content="Save" Grid.Column="3" Grid.Row="4" Margin="5"
-                Command="{Binding SaveCommand}" Style="{StaticResource GenericSaveButton}"/>
     </Grid>
 </UserControl>

@@ -100,7 +100,7 @@ namespace SetupAssistent.ViewModel
                 try
                 {
                     bool saved = false;
-                    string ModulesOutputPath = AllSettings.settings[0].outputFilePath + "\\Modules.xml";
+                    string ModulesOutputPath = AllSettings.settings[0].OutputFilePath + "\\Modules.xml";
 
                     using (TextWriter writer = new StreamWriter(ModulesOutputPath))
                     {

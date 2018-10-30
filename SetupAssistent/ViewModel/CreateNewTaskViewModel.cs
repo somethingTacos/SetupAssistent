@@ -46,7 +46,7 @@ namespace SetupAssistent.ViewModel
             CurrentTaskType = new TaskTypeIndex();
             CurrentTaskType.SelectedTaskTypeIndex = 0;
             //This will be a setting later
-            TasksOutputPath = AllSettings.settings[0].outputFilePath + "\\Tasks.xml";
+            TasksOutputPath = AllSettings.settings[0].OutputFilePath + "\\Tasks.xml";
 
             InitTaskTypes();
         }

@@ -60,6 +60,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CustomControls\ModuleControl.cs" />
+    <Compile Include="CustomControls\SaveSettingsStackPanel.cs" />
     <Compile Include="Helpers\BindingProxy.cs" />
     <Compile Include="CustomControls\TaskUserControl.xaml.cs">
       <DependentUpon>TaskUserControl.xaml</DependentUpon>
