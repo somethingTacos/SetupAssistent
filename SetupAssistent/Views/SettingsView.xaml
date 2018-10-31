@@ -8,12 +8,28 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <Style x:Key="SaveStackPanelStyle" TargetType="{x:Type StackPanel}">
-            <Setter Property="Height" Value="0"/>
+        <Style x:Key="SaveStackPanelStyle" TargetType="{x:Type cc:SaveSettingsStackPanel}">
+            <Setter Property="Height" Value="48"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="Orientation" Value="Horizontal"/>
             <Setter Property="Background" Value="RoyalBlue"/>
             <Style.Triggers>
+                <Trigger Property="SettingsUpdated" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
@@ -35,19 +51,16 @@
         </Grid.RowDefinitions>
 
         <!--Not sure why it was giving me issues eailer, but maybe it was a fluck. Strange...-->
-        <cc:SaveSettingsStackPanel Orientation="Horizontal">
-            <TextBlock/>
-            <Button/>
-        </cc:SaveSettingsStackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" Style="{StaticResource SaveStackPanelStyle}">
-            <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" FontSize="20" Foreground="Gainsboro" Margin="10"
-                   TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center">
-            Settings have <Bold><Underline>NOT</Underline></Bold> been saved yet!
+        <cc:SaveSettingsStackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" 
+                                   Style="{StaticResource SaveStackPanelStyle}">
+            <TextBlock FontSize="20" Foreground="Gainsboro" Margin="10"
+                       TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center">
+                Settings have <Bold><Underline>NOT</Underline></Bold> been saved yet!
             </TextBlock>
             <Button Content="Save" Width="80" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"
                     Command="{Binding SaveCommand}" Style="{StaticResource GenericSaveButton}" Margin="10 0 10 0"/>
-        </StackPanel>
+        </cc:SaveSettingsStackPanel>
+        
         <TextBlock Grid.Column="1" Grid.Row="2" Text="Output Path"  FontSize="20" VerticalAlignment="Center"/>
         <TextBox Text="{Binding settings.outputFilePath}" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="3"
                  Style="{StaticResource GenericTextBox}"
