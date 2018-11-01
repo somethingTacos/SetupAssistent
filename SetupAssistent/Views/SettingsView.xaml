@@ -9,23 +9,22 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <Style x:Key="SaveStackPanelStyle" TargetType="{x:Type cc:SaveSettingsStackPanel}">
-            <Setter Property="Height" Value="48"/>
+            <Setter Property="Height" Value="0"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="Orientation" Value="Horizontal"/>
-            <Setter Property="Background" Value="RoyalBlue"/>
             <Style.Triggers>
-                <Trigger Property="SettingsUpdated" Value="True">
+                <Trigger Property="SettingsChanged" Value="True">
                     <Trigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                
+                                <DoubleAnimation Storyboard.TargetProperty="Height" To="48" From="0" Duration="0:0:0.200"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </Trigger.EnterActions>
                     <Trigger.ExitActions>
                         <BeginStoryboard>
                             <Storyboard>
-
+                                <DoubleAnimation Storyboard.TargetProperty="Height" To="0" From="48" Duration="0:0:0.200"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </Trigger.ExitActions>
@@ -38,7 +37,6 @@
             <ColumnDefinition Width="5"/>
             <ColumnDefinition Width="120"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="5"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -46,23 +44,24 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="45"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="45"/>
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
-
-        <!--Not sure why it was giving me issues eailer, but maybe it was a fluck. Strange...-->
-        <cc:SaveSettingsStackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" 
-                                   Style="{StaticResource SaveStackPanelStyle}">
+        
+        <Rectangle Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="5" Fill="RoyalBlue"/>
+        <cc:SaveSettingsStackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="5" 
+                                   Style="{StaticResource SaveStackPanelStyle}" SettingsChanged="{Binding settings.SettingsChanged}">
             <TextBlock FontSize="20" Foreground="Gainsboro" Margin="10"
                        TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center">
                 Settings have <Bold><Underline>NOT</Underline></Bold> been saved yet!
             </TextBlock>
-            <Button Content="Save" Width="80" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"
-                    Command="{Binding SaveCommand}" Style="{StaticResource GenericSaveButton}" Margin="10 0 10 0"/>
+            <Button Content="Save Settings" Width="100" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Command="{Binding SaveCommand}" Style="{StaticResource GenericSaveButton}" Margin="30 0 10 0"/>
         </cc:SaveSettingsStackPanel>
         
+        <!--Need to make it so the output path can't be changed if you are creating a task or a module -->
+        <!--that of just make sure the settings can't be saved -->
         <TextBlock Grid.Column="1" Grid.Row="2" Text="Output Path"  FontSize="20" VerticalAlignment="Center"/>
-        <TextBox Text="{Binding settings.outputFilePath}" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="3"
+        <TextBox Text="{Binding settings.OutputFilePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="3"
                  Style="{StaticResource GenericTextBox}"
                  VerticalContentAlignment="Center" Margin="0 0 10 0"/>
     </Grid>

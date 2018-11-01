@@ -16,7 +16,6 @@ namespace SetupAssistent.ViewModel
         #region Public Properties
         public Settings settings { get; set; }
         public MyICommand SaveCommand { get; set; }
-        public bool SettingsUpdated { get; set; }
         #endregion
 
         #region Default Constructor
@@ -37,7 +36,8 @@ namespace SetupAssistent.ViewModel
              * 
              * In the future, I'll need to move packed files if any exist.
              */
-
+            
+            //Code for if Outputpath was changed -- Start
             void CheckAndMoveFile(string FileToMove, string MoveToHere)
             {
                 if (File.Exists(FileToMove))
@@ -56,10 +56,7 @@ namespace SetupAssistent.ViewModel
 
             AllSettings.settings[0] = settings;
 
-            MessageBox.Show(String.Format("S output: {1}{0}AS Ouput: {2}{0}OFP Output: {3}", Environment.NewLine, settings.OutputFilePath, AllSettings.settings[0].OutputFilePath, AllSettings.OldSettingsFilePath.ToString()));
-
             XmlSerializer xmlS = new XmlSerializer(typeof(ObservableCollection<Settings>));
-
 
             using (TextWriter writer = new StreamWriter(AllSettings.SettingsFile))
             {
@@ -67,7 +64,7 @@ namespace SetupAssistent.ViewModel
             }
 
             string Old_ModulesFile = AllSettings.OldSettingsFilePath + "\\Modules.xml";
-            string Old_TasksFile = AllSettings.OldSettingsFilePath + "\\Modules.xml";
+            string Old_TasksFile = AllSettings.OldSettingsFilePath + "\\Tasks.xml";
 
             CheckAndMoveFile(Old_ModulesFile, settings.OutputFilePath + "\\Modules.xml");
             CheckAndMoveFile(Old_TasksFile, settings.OutputFilePath + "\\Tasks.xml");
@@ -75,6 +72,11 @@ namespace SetupAssistent.ViewModel
             //Packed files will have to be moved as well, whenever I decide to work on those. Probably not for awhile.
 
             AllSettings.OldSettingsFilePath = settings.OutputFilePath;
+            //Code for if Outputpath was changed -- End
+
+
+
+            settings.SettingsChanged = false;
         }
         public bool canSaveCommand()
         {
@@ -90,7 +92,7 @@ namespace SetupAssistent.ViewModel
 
             settings = tempSettings;
 
-            SettingsUpdated = settings.SettingsChanged;
+            settings.SettingsChanged = false;
             AllSettings.OldSettingsFilePath = settings.OutputFilePath;
         }
         #endregion

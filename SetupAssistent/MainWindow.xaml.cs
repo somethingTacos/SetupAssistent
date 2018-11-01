@@ -38,8 +38,8 @@ namespace SetupAssistent
             settingsWindow.Content = settingsVM;
             settingsWindow.MinWidth = 500;
             settingsWindow.MinHeight = 400;
-            settingsWindow.Width = 500;
-            settingsWindow.Height = 400;
+            settingsWindow.Width = 800;
+            settingsWindow.Height = 500;
             settingsWindow.Title = "Settings";
             settingsWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             settingsWindow.ShowDialog();
