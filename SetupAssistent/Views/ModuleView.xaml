@@ -190,8 +190,8 @@
 
         <Rectangle Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Fill="DimGray"/>
         <Button Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Style="{StaticResource GenericSideMenuButton}">
-            <!--<Image Source="Images/general-settings.png" RenderOptions.BitmapScalingMode="Fant"
-                   Margin="3"/>-->
+            <Image Source="SetupAssitant/Images/general-settings.png" RenderOptions.BitmapScalingMode="Fant"
+                   Margin="3"/>
         </Button>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
