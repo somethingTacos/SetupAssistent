@@ -19,7 +19,7 @@ namespace SetupAssistent.ViewModel
         #endregion
 
         #region Default Constructor
-        public SettingsViewModel()
+        public SettingsViewModel(NavigationViewModel navigationViewModel)  //need to add back button to this view/viewmodel, but I'll do that some other time.
         {
             SaveCommand = new MyICommand(onSaveCommand, canSaveCommand);
             InitSettings();

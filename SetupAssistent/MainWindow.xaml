@@ -16,14 +16,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <!--<Rectangle Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Fill="DimGray"/>
-
-        <Button x:Name="Settings_Button" Grid.Column="0" Grid.Row="0"
-                Click="Settings_Button_Click" Style="{StaticResource GenericSideMenuButton}">
-            <Image Source="Images/general-settings.png" RenderOptions.BitmapScalingMode="Fant"
-                   Margin="3"/>
-        </Button>-->
-
+        
         <DockPanel LastChildFill="True" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
             <ContentControl x:Name="Pages" DockPanel.Dock="Right" Content="{Binding SelectedViewModel}"/>
         </DockPanel>

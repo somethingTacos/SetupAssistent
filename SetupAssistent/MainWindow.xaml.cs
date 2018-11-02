@@ -30,19 +30,5 @@ namespace SetupAssistent
             viewmodel.SelectedViewModel = new ModuleViewModel(viewmodel);
             this.DataContext = viewmodel;
         }
-
-        private void Settings_Button_Click(object sender, RoutedEventArgs e)
-        {
-            Window settingsWindow = new Window();
-            SettingsViewModel settingsVM = new SettingsViewModel();
-            settingsWindow.Content = settingsVM;
-            settingsWindow.MinWidth = 500;
-            settingsWindow.MinHeight = 400;
-            settingsWindow.Width = 800;
-            settingsWindow.Height = 500;
-            settingsWindow.Title = "Settings";
-            settingsWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            settingsWindow.ShowDialog();
-        }
     }
 }

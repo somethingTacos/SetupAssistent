@@ -19,6 +19,7 @@ namespace SetupAssistent.ViewModel
         public MyICommand CreateNewModuleCommand { get; set; }
         public MyICommand RemoveModuleCommand { get; set; }
         public MyICommand EditModuleCommand { get; set; }
+        public MyICommand OpenSettingsCommand { get; set; }
         public string workingModuleName { get; set; }
         public string userName = Environment.UserName.ToString();
         public string ModulesFile = string.Empty;
@@ -35,6 +36,7 @@ namespace SetupAssistent.ViewModel
             CreateNewModuleCommand = new MyICommand(onCreateNewModuleCommand, canCreateNewModuleCommand);
             RemoveModuleCommand = new MyICommand(onRemoveModuleCommand, canRemoveModuleCommand);
             EditModuleCommand = new MyICommand(onEditModuleCommand, canEditModuleCommand);
+            OpenSettingsCommand = new MyICommand(onOpenSettingsCommand, canOpenSettingsCommand);
             //These paths are just for testing. I'll have these be settable later in a settings view.
             LoadXMLData();
         }
@@ -218,6 +220,15 @@ namespace SetupAssistent.ViewModel
             }
         }
         public bool canEditModuleCommand()
+        {
+            return true;
+        }
+
+        public void onOpenSettingsCommand(object parameter)
+        {
+            _navigationViewModel.SelectedViewModel = new SettingsViewModel(_navigationViewModel);
+        }
+        public bool canOpenSettingsCommand()
         {
             return true;
         }
