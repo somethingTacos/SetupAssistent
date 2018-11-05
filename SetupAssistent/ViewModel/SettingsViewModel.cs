@@ -16,12 +16,16 @@ namespace SetupAssistent.ViewModel
         #region Public Properties
         public Settings settings { get; set; }
         public MyICommand SaveCommand { get; set; }
+        public MyICommand BackCommand { get; set; }
+        public NavigationViewModel _navigationViewModel;
         #endregion
 
         #region Default Constructor
         public SettingsViewModel(NavigationViewModel navigationViewModel)  //need to add back button to this view/viewmodel, but I'll do that some other time.
         {
+            _navigationViewModel = navigationViewModel;
             SaveCommand = new MyICommand(onSaveCommand, canSaveCommand);
+            BackCommand = new MyICommand(onBackCommand, canBackCommand);
             InitSettings();
         }
         #endregion
@@ -79,6 +83,15 @@ namespace SetupAssistent.ViewModel
             settings.SettingsChanged = false;
         }
         public bool canSaveCommand()
+        {
+            return true;
+        }
+
+        public void onBackCommand(object parameter)
+        {
+            _navigationViewModel.SelectedViewModel = new ModuleViewModel(_navigationViewModel);
+        }
+        public bool canBackCommand()
         {
             return true;
         }
