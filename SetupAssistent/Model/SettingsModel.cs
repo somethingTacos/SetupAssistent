@@ -43,9 +43,22 @@ namespace SetupAssistent.Model
             get { return _outputFilePath; }
             set
             {
-                _outputFilePath = value;
-                RaisePropertyChanged("outputFilePath");
-                SettingsChanged = true;
+                if (_outputFilePath != null)
+                {
+
+                    if (value.ToLower() != _outputFilePath.ToLower())
+                    {
+                        _outputFilePath = value;
+                        RaisePropertyChanged("outputFilePath");
+                        SettingsChanged = true;
+                    }
+                }
+                else
+                {
+                    _outputFilePath = value;
+                    RaisePropertyChanged("outputFilePath");
+                    SettingsChanged = true;
+                }
             }
         }
 

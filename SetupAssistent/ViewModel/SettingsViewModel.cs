@@ -17,6 +17,7 @@ namespace SetupAssistent.ViewModel
         public Settings settings { get; set; }
         public MyICommand SaveCommand { get; set; }
         public MyICommand BackCommand { get; set; }
+        public MyICommand BrowseCommand { get; set; }
         public NavigationViewModel _navigationViewModel;
         #endregion
 
@@ -26,6 +27,7 @@ namespace SetupAssistent.ViewModel
             _navigationViewModel = navigationViewModel;
             SaveCommand = new MyICommand(onSaveCommand, canSaveCommand);
             BackCommand = new MyICommand(onBackCommand, canBackCommand);
+            BrowseCommand = new MyICommand(onBrowseCommand, canBrowseCommand);
             InitSettings();
         }
         #endregion
@@ -92,6 +94,26 @@ namespace SetupAssistent.ViewModel
             _navigationViewModel.SelectedViewModel = new ModuleViewModel(_navigationViewModel);
         }
         public bool canBackCommand()
+        {
+            return true;
+        }
+
+        public void onBrowseCommand(object parameter)
+        {
+            using (var dlg = new System.Windows.Forms.FolderBrowserDialog())
+            {
+                dlg.Description = "Select the folder where you want to store the module and task data files.";
+                System.Windows.Forms.DialogResult result = dlg.ShowDialog();
+                if(result == System.Windows.Forms.DialogResult.OK)
+                {
+                    if(dlg.SelectedPath != null)
+                    {
+                        settings.OutputFilePath = dlg.SelectedPath.ToString();
+                    }
+                }
+            }
+        }
+        public bool canBrowseCommand()
         {
             return true;
         }
