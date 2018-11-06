@@ -57,7 +57,7 @@
                 Settings have <Bold><Underline>NOT</Underline></Bold> been saved yet!
             </TextBlock>
             <Button Content="Save Settings" Width="100" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center"
-                    Command="{Binding SaveCommand}" Style="{StaticResource GenericSaveButton}" Margin="30 0 10 0"/>
+                    Command="{Binding SaveCommand}" Style="{StaticResource GenericSaveButton}" Margin="30 0 10 0" IsTabStop="False"/>
         </cc:SaveSettingsStackPanel>
         
         <!--Need to make it so the output path can't be changed if you are creating a task or a module -->
