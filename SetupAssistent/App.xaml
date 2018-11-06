@@ -223,5 +223,9 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <!--Generic ToggleButton (toggleSwitch)-->
+        <Style x:Key="GenericToggleButton" TargetType="{x:Type ToggleButton}">
+            
+        </Style>
     </Application.Resources>
 </Application>
