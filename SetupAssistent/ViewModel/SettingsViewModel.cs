@@ -18,6 +18,7 @@ namespace SetupAssistent.ViewModel
         public MyICommand SaveCommand { get; set; }
         public MyICommand BackCommand { get; set; }
         public MyICommand BrowseCommand { get; set; }
+        public MyICommand ToggleDarkThemeCommand { get; set; }
         public NavigationViewModel _navigationViewModel;
         #endregion
 
@@ -28,6 +29,7 @@ namespace SetupAssistent.ViewModel
             SaveCommand = new MyICommand(onSaveCommand, canSaveCommand);
             BackCommand = new MyICommand(onBackCommand, canBackCommand);
             BrowseCommand = new MyICommand(onBrowseCommand, canBrowseCommand);
+            ToggleDarkThemeCommand = new MyICommand(onToggleDarkThemeCommand, canToggleDarkThemeCommand);
             InitSettings();
         }
         #endregion
@@ -43,7 +45,18 @@ namespace SetupAssistent.ViewModel
              * In the future, I'll need to move packed files if any exist.
              */
             
-            //Code for if Outputpath was changed -- Start
+            void SaveSettingsToFile()
+            {
+                AllSettings.settings[0] = settings;
+
+                XmlSerializer xmlS = new XmlSerializer(typeof(ObservableCollection<Settings>));
+
+                using (TextWriter writer = new StreamWriter(AllSettings.SettingsFile))
+                {
+                    xmlS.Serialize(writer, AllSettings.settings);
+                }
+            }
+
             void CheckAndMoveFile(string FileToMove, string MoveToHere)
             {
                 if (File.Exists(FileToMove))
@@ -60,28 +73,26 @@ namespace SetupAssistent.ViewModel
                 }
             }
 
-            AllSettings.settings[0] = settings;
-
-            XmlSerializer xmlS = new XmlSerializer(typeof(ObservableCollection<Settings>));
-
-            using (TextWriter writer = new StreamWriter(AllSettings.SettingsFile))
+            void ApplySettings()
             {
-                xmlS.Serialize(writer, AllSettings.settings);
+                //Change OutPutFilePath
+                if (AllSettings.OldSettingsFilePath.ToLower() != settings.OutputFilePath.ToLower())
+                {
+                    string Old_ModulesFile = AllSettings.OldSettingsFilePath + "\\Modules.xml";
+                    string Old_TasksFile = AllSettings.OldSettingsFilePath + "\\Tasks.xml";
+
+                    CheckAndMoveFile(Old_ModulesFile, settings.OutputFilePath + "\\Modules.xml");
+                    CheckAndMoveFile(Old_TasksFile, settings.OutputFilePath + "\\Tasks.xml");
+
+                    //Packed files will have to be moved as well, whenever I decide to work on those. Probably not for awhile.
+
+                    AllSettings.OldSettingsFilePath = settings.OutputFilePath;
+                }
             }
 
-            string Old_ModulesFile = AllSettings.OldSettingsFilePath + "\\Modules.xml";
-            string Old_TasksFile = AllSettings.OldSettingsFilePath + "\\Tasks.xml";
-
-            CheckAndMoveFile(Old_ModulesFile, settings.OutputFilePath + "\\Modules.xml");
-            CheckAndMoveFile(Old_TasksFile, settings.OutputFilePath + "\\Tasks.xml");
-
-            //Packed files will have to be moved as well, whenever I decide to work on those. Probably not for awhile.
-
-            AllSettings.OldSettingsFilePath = settings.OutputFilePath;
-            //Code for if Outputpath was changed -- End
-
-
-
+            SaveSettingsToFile();
+            ApplySettings();
+            
             settings.SettingsChanged = false;
         }
         public bool canSaveCommand()
@@ -117,13 +128,22 @@ namespace SetupAssistent.ViewModel
         {
             return true;
         }
+
+        public void onToggleDarkThemeCommand(object parameter)
+        {
+            //I don't think I actually need this command since the control is bound to the settings property inside the viewModel.
+        }
+        public bool canToggleDarkThemeCommand()
+        {
+            return true;
+        }
         #endregion
 
         #region Other Methods
         public void InitSettings()
         {
             Settings tempSettings = new Settings();
-            tempSettings.OutputFilePath = AllSettings.settings[0].OutputFilePath.ToString();
+            tempSettings = AllSettings.settings[0];
 
             settings = tempSettings;
 

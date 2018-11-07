@@ -159,7 +159,7 @@ namespace SetupAssistent.ViewModel
 
         public void onCreateNewModuleCommand(object parameter)
         {
-            _navigationViewModel.SelectedViewModel = new CreateNewModuleViewModel(_navigationViewModel);
+            _navigationViewModel.SelectedViewModel = new CreateNewModuleViewModel(_navigationViewModel, null, 0);
         }
 
         public bool canCreateNewModuleCommand()
@@ -213,10 +213,25 @@ namespace SetupAssistent.ViewModel
 
         public void onEditModuleCommand(object parameter)
         {
-            if(parameter is Module module)
+            try
             {
-                MessageBox.Show(String.Format("'{0}' would have been edited", module.Name.ToString()));
-                //I might try to reuse the CreateNewModuleView, but I'm not sure if it would be easier to just create a new view.
+                if (parameter is Module module)
+                {
+                    int Index = 0;
+
+                    foreach (Module _module in AllModules.modulesList)
+                    {
+                        if (_module.Name == module.Name)
+                        {
+                            Index = AllModules.modulesList.IndexOf(_module);
+                        }
+                    }
+                    _navigationViewModel.SelectedViewModel = new CreateNewModuleViewModel(_navigationViewModel, module, Index);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
         public bool canEditModuleCommand()

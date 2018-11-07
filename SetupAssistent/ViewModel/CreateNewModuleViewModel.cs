@@ -21,11 +21,15 @@ namespace SetupAssistent.ViewModel
         private readonly NavigationViewModel _navigationViewModel;
         public string userName = Environment.UserName.ToString();
         public string ModuleOutputFile = string.Empty;
+        private readonly Module ExistingModule;
+        private readonly int ModuleIndex;
         #endregion
 
         #region Default Constructor
-        public CreateNewModuleViewModel(NavigationViewModel navigationViewModel)
+        public CreateNewModuleViewModel(NavigationViewModel navigationViewModel, Module existingModule, int index)
         {
+            ExistingModule = existingModule;
+            ModuleIndex = index;
             _navigationViewModel = navigationViewModel;
             CancelCommand = new MyICommand(onCancelCommand, canCancelCommand);
             SaveCommand = new MyICommand(onSaveCommand, canSaveCommand);
@@ -40,6 +44,16 @@ namespace SetupAssistent.ViewModel
         public void initNewModule()
         {
             Module tempModule = new Module();
+
+            if(ExistingModule != null)
+            {
+                //I have some potential bugs here. Still looking into it.
+                tempModule.Name = ExistingModule.Name.ToString();
+                tempModule.Description = ExistingModule.Description.ToString();
+                tempModule.DescriptionPreview = ExistingModule.DescriptionPreview.ToString();
+                tempModule.ImageSource = ExistingModule.ImageSource.ToString();
+                tempModule.TasksList = ExistingModule.TasksList;
+            }
 
             NewModule = tempModule;
         }
@@ -81,7 +95,13 @@ namespace SetupAssistent.ViewModel
                     {
                         try
                         {
-                            
+                            if(ExistingModule != null)
+                            {
+                                if (AllModules.modulesList != null)
+                                {
+                                    AllModules.modulesList.RemoveAt(ModuleIndex);
+                                }
+                            }
                             bool saved = false;
 
                             using (TextWriter writer = new StreamWriter(ModuleOutputFile))

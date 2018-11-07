@@ -117,7 +117,10 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type cc:ModuleButton}">
                         <Grid x:Name="Chrome" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}" 
+                                              RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsEnabled" Value="false">
@@ -190,7 +193,7 @@
 
         <Rectangle Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Fill="DimGray"/>
         <Button Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Style="{StaticResource GenericSideMenuButton}"
-                Command="{Binding OpenSettingsCommand}">
+                Command="{Binding OpenSettingsCommand}" ToolTip="Open Settings">
             <Image Source="/Images/general-settings.png" RenderOptions.BitmapScalingMode="Fant"
                    Margin="3"/>
         </Button>

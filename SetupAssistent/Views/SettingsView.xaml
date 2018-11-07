@@ -73,6 +73,7 @@
                 Command="{Binding BrowseCommand}"/>
         <TextBlock Grid.Column="2" Grid.Row="3" Text="Dark Theme"  FontSize="20" VerticalAlignment="Center"/>
         <ToggleButton Grid.Column="3" Grid.Row="3" Height="25" Width="50" HorizontalAlignment="Left"
-                      Style="{StaticResource GenericToggleButton}"/>
+                      Style="{StaticResource GenericToggleButton}" Command="{Binding ToggleDarkThemeCommand}"
+                      IsChecked="{Binding settings.DarkTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
 </UserControl>
