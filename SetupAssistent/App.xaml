@@ -229,7 +229,7 @@
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Content" Value="X"/>
+            <Setter Property="Content" Value="OFF"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ToggleButton}">
@@ -245,7 +245,7 @@
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
-                                <Setter Property="Content" Value="OK"/>
+                                <Setter Property="Content" Value="ON"/>
                                 <Setter Property="Foreground" Value="Gainsboro"/>
                                 <Trigger.EnterActions>
                                     <BeginStoryboard>
