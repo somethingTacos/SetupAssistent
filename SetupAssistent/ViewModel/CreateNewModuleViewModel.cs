@@ -76,7 +76,7 @@ namespace SetupAssistent.ViewModel
             if(NewModule.Name != "")
             {
                 //Check settings for ModuleNameSize limit or something here.
-                if (NewModule.Name.Length > 20)
+                if (AllSettings.settings[0].LimitModuleNameSize ? NewModule.Name.Length > 20 : false)
                 {
                     MessageBox.Show(String.Format("The name '{0}' is too long. Please shorten the name or disable this feature in settings.", NewModule.Name.ToString()), "Name is too long", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
@@ -85,9 +85,20 @@ namespace SetupAssistent.ViewModel
                     bool nameUsed = false;
                     foreach (Module module in AllModules.modulesList)
                     {
-                        if (module.Name == NewModule.Name)
+                        if (ExistingModule != null)
                         {
-                            nameUsed = true;
+
+                            if (ExistingModule.Name == NewModule.Name ? false : module.Name == NewModule.Name)
+                            {
+                                nameUsed = true;
+                            }
+                        }
+                        else
+                        {
+                            if(module.Name == NewModule.Name)
+                            {
+                                nameUsed = true;
+                            }
                         }
                     }
 

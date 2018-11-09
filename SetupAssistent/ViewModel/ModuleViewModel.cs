@@ -67,6 +67,7 @@ namespace SetupAssistent.ViewModel
             {
                 Settings defaultSettings = new Settings();
                 defaultSettings.OutputFilePath = AllSettings.SettingsFolder;
+                defaultSettings.LimitModuleNameSize = true;
                 tempOC_Settings.Add(defaultSettings);
                 ModulesFile = AllSettings.SettingsFolder.ToString() + "\\Modules.xml";
                 TasksFile = AllSettings.SettingsFolder.ToString() + "\\Tasks.xml";

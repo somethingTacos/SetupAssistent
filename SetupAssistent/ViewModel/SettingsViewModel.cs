@@ -18,7 +18,6 @@ namespace SetupAssistent.ViewModel
         public MyICommand SaveCommand { get; set; }
         public MyICommand BackCommand { get; set; }
         public MyICommand BrowseCommand { get; set; }
-        public MyICommand ToggleDarkThemeCommand { get; set; }
         public NavigationViewModel _navigationViewModel;
         #endregion
 
@@ -29,7 +28,6 @@ namespace SetupAssistent.ViewModel
             SaveCommand = new MyICommand(onSaveCommand, canSaveCommand);
             BackCommand = new MyICommand(onBackCommand, canBackCommand);
             BrowseCommand = new MyICommand(onBrowseCommand, canBrowseCommand);
-            ToggleDarkThemeCommand = new MyICommand(onToggleDarkThemeCommand, canToggleDarkThemeCommand);
             InitSettings();
         }
         #endregion
@@ -125,15 +123,6 @@ namespace SetupAssistent.ViewModel
             }
         }
         public bool canBrowseCommand()
-        {
-            return true;
-        }
-
-        public void onToggleDarkThemeCommand(object parameter)
-        {
-            //I don't think I actually need this command since the control is bound to the settings property inside the viewModel.
-        }
-        public bool canToggleDarkThemeCommand()
         {
             return true;
         }
