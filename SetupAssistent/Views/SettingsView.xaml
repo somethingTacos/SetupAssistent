@@ -79,8 +79,9 @@
                       IsChecked="{Binding settings.DarkTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </DockPanel>
         <DockPanel Grid.Column="2" Grid.Row="4" Grid.ColumnSpan="2">
-            <TextBlock  Text="Limit Module Name Size"  FontSize="20" VerticalAlignment="Center" ToolTip="Limit Module name length to 20 characters"/>
+            <TextBlock  Text="Limit Module Name Size"  FontSize="20" VerticalAlignment="Center"/>
             <ToggleButton Height="25" Width="50" HorizontalAlignment="Left" Margin="20 0 0 0"
+                          ToolTip="Limit Module name length to 20 characters"
                           Style="{StaticResource GenericToggleButton}" Command="{Binding ToggleLimitModuleNameSizeCommand}"
                           IsChecked="{Binding settings.LimitModuleNameSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </DockPanel>
