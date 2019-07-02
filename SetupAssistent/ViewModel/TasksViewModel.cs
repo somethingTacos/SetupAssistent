@@ -65,6 +65,10 @@ namespace SetupAssistent.ViewModel
                 {
                     ProcessStartInfo scriptTask = new ProcessStartInfo();
                     scriptTask.FileName = runScript.ScriptSource;
+                    string[] tempInfo = runScript.ScriptSource.Split('\\');
+                    tempInfo = tempInfo.Where(x => x != tempInfo.Last<string>()).ToArray();
+                    string workingDir = String.Join("\\", tempInfo);
+                    scriptTask.WorkingDirectory = workingDir;
                     scriptTask.Arguments = runScript.ScriptParameters;
                     Process.Start(scriptTask);
                 }
@@ -79,6 +83,10 @@ namespace SetupAssistent.ViewModel
                 {
                     ProcessStartInfo programTask = new ProcessStartInfo();
                     programTask.FileName = installProgram.ProgramSource;
+                    string[] tempInfo = installProgram.ProgramSource.Split('\\');
+                    tempInfo = tempInfo.Where(x => x != tempInfo.Last<string>()).ToArray();
+                    string workingDir = String.Join("\\", tempInfo);
+                    programTask.WorkingDirectory = workingDir;
                     Process.Start(programTask);
                 }
                 catch (Exception ex)
