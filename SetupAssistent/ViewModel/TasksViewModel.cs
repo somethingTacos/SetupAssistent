@@ -8,6 +8,8 @@ using SetupAssistent.Model;
 using System.Windows.Data;
 using System.Windows;
 using System.Diagnostics;
+using System.DirectoryServices.AccountManagement;
+using System.DirectoryServices;
 
 namespace SetupAssistent.ViewModel
 {
@@ -75,19 +77,35 @@ namespace SetupAssistent.ViewModel
             {
                 try
                 {
-
-                ProcessStartInfo programTask = new ProcessStartInfo();
-                programTask.FileName = installProgram.ProgramSource;
-                Process.Start(programTask);
+                    ProcessStartInfo programTask = new ProcessStartInfo();
+                    programTask.FileName = installProgram.ProgramSource;
+                    Process.Start(programTask);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
             }
             if(parameter is AddLocalAdmin addLocalAdmin)
             {
+                try
+                {
+                    using (var pcLocal = new PrincipalContext(ContextType.Machine))
+                    {
+                        var group = GroupPrincipal.FindByIdentity(pcLocal, "Administrators");
 
+                        using (var pcDomain = new PrincipalContext(ContextType.Domain, Environment.UserDomainName))
+                        {
+                            group.Members.Add(pcDomain, IdentityType.SamAccountName, addLocalAdmin.UserName);
+                            group.Save();
+                        };
+                    };
+                    MessageBox.Show($"New local admin added: {Environment.UserDomainName}\\{addLocalAdmin.UserName}", "Local Admin Added", MessageBoxButton.OK);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                };
             }
         }
         public bool CanRunTaskCommand()

@@ -67,7 +67,7 @@ namespace SetupAssistent.Model
     public class AddLocalAdmin : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
-
+        public string Name { get; set; } = "";
         public string UserName { get; set; } = "";
         public bool IsIncluded { get; set; } = false;
     }

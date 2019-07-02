@@ -49,6 +49,14 @@
                                                             RelativeSource={RelativeSource Mode=FindAncestor,
                                                             AncestorType=ItemsControl}}"/>
                 </DataTemplate>
+                
+                <!-- Add Local Admin Task Template -->
+                <DataTemplate DataType="{x:Type data:AddLocalAdmin}">
+                    <controls:TaskUserControl TaskName="{Binding Name}" TaskDescription="Adds a local admin"
+                                              TaskCommand="{Binding DataContext.RunTaskCommand,
+                                                            RelativeSource={RelativeSource Mode=FindAncestor,
+                                                            AncestorType=ItemsControl}}"/>
+                </DataTemplate>
             </ItemsControl.Resources>
         </ItemsControl>
         

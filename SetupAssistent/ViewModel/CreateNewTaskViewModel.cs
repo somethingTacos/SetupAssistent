@@ -30,6 +30,13 @@ namespace SetupAssistent.ViewModel
         public string userName = Environment.UserName;
         public string TasksOutputPath = string.Empty;
 
+        private string _UserDomain;
+        public string UserDomain
+        {
+            get { return _UserDomain; }
+            set { _UserDomain = value; }
+        }
+
         #endregion
 
         #region Default Constructor
@@ -57,6 +64,8 @@ namespace SetupAssistent.ViewModel
 
         public void InitTaskTypes()
         {
+            UserDomain = $"Current Logon Domain: {Environment.UserDomainName}";
+
             RunScript tempRS = new RunScript();
             InstallProgram tempIP = new InstallProgram();
             AddLocalAdmin tempALA = new AddLocalAdmin();
@@ -142,40 +151,41 @@ namespace SetupAssistent.ViewModel
 
                                 tempOC = AllTasks.tasksList;
 
-                                foreach (RunScript RS in tempOC[0].ScriptTasks)
-                                {
-                                    if (RS.Name.ToString() == NewRunScript.Name.ToString())
-                                    {
-                                        nameUsed = true;
-                                    }
-                                }
+                                nameUsed = AllTasks.tasksList[0].ScriptTasks.Where(x => x.Name == NewRunScript.Name).Count() > 0;
 
                                 if (!nameUsed)
                                 {
-                                    XmlSerializer xmlS = new XmlSerializer(typeof(ObservableCollection<ModuleTasks>));
-                                    tempOC[0].ScriptTasks.Add(NewRunScript);
-                                    xmlS.Serialize(writer, tempOC);
-                                    saved = true;
+                                    try
+                                    {
+                                        XmlSerializer xmlS = new XmlSerializer(typeof(ObservableCollection<ModuleTasks>));
+                                        tempOC[0].ScriptTasks.Add(NewRunScript);
+                                        xmlS.Serialize(writer, tempOC);
+                                        saved = true;
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        MessageBox.Show(ex.Message);
+                                    }
 
                                     if (saved)
                                     {
-                                        MessageBox.Show(String.Format("Task '{0}' was saved.", NewRunScript.Name.ToString()), "Task Saved");  // This will be replaced with a delayed animation in the future. For now this works well enough for confirmation.  <<<------ IMPORTANT
+                                        MessageBox.Show($"Task '{NewRunScript.Name.ToString()}' was saved.", "Task Saved");  // This will be replaced with a delayed animation in the future. For now this works well enough for confirmation.  <<<------ IMPORTANT
                                         _navigationViewModel.SelectedViewModel = new AddTasksViewModel(_navigationViewModel, CurrentModuleName);
                                     }
                                     else
                                     {
-                                        MessageBox.Show(String.Format("Something went wroung.{0}Could not save Task.", Environment.NewLine), "Oops  :(", MessageBoxButton.OK, MessageBoxImage.Error);
+                                        MessageBox.Show($"Something went wroung.{Environment.NewLine}Could not save Task.", "Oops  :(", MessageBoxButton.OK, MessageBoxImage.Error);
                                     }
                                 }
                                 else
                                 {
-                                    MessageBox.Show(String.Format("The name '{0}' is currently in use by another task.{1}Please choose another name.", NewRunScript.Name.ToString(), Environment.NewLine), "Name Already In Use", MessageBoxButton.OK, MessageBoxImage.Error);
+                                    MessageBox.Show($"The name '{NewRunScript.Name.ToString()}' is currently in use by another task.{Environment.NewLine}Please choose another name.", "Name Already In Use", MessageBoxButton.OK, MessageBoxImage.Error);
                                 }
                             }
                         }
                         else
                         {
-                            MessageBox.Show(String.Format("The name '{0}' is invalid (null) or the script source does not exist.{1}Please confirm the name and script source are valid.", NewRunScript.Name.ToString(), Environment.NewLine), "Invalid Properties", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show($"The name '{NewRunScript.Name.ToString()}' is invalid (null) or the script source does not exist.{Environment.NewLine}Please confirm the name and script source are valid.", "Invalid Properties", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                         break;
                     }
@@ -183,6 +193,62 @@ namespace SetupAssistent.ViewModel
                     {
                         if (NewInstallProgram.Name.ToString() != "" && NewInstallProgram.ProgramSource.ToString() != "" && File.Exists(NewInstallProgram.ProgramSource.ToString()))
                         {
+                            using (TextWriter writer = new StreamWriter(TasksOutputPath))
+                            {
+                                ObservableCollection<ModuleTasks> tempOC = new ObservableCollection<ModuleTasks>();
+
+                                if (AllTasks.tasksList.Count == 0)
+                                {
+                                    ModuleTasks tasks = new ModuleTasks();
+
+                                    AllTasks.tasksList.Add(tasks);
+                                }
+
+                                tempOC = AllTasks.tasksList;
+
+                                nameUsed = AllTasks.tasksList[0].InstallProgramTasks.Where(x => x.Name == NewInstallProgram.Name).Count() > 0;
+
+                                if (!nameUsed)
+                                {
+                                    try
+                                    {
+                                        XmlSerializer xmlS = new XmlSerializer(typeof(ObservableCollection<ModuleTasks>));
+                                        tempOC[0].InstallProgramTasks.Add(NewInstallProgram);
+                                        xmlS.Serialize(writer, tempOC);
+                                        saved = true;
+                                    }
+                                    catch(Exception ex)
+                                    {
+                                        MessageBox.Show(ex.Message);
+                                    }
+
+                                    if (saved)
+                                    {
+                                        MessageBox.Show($"Task '{NewInstallProgram.Name.ToString()}' was saved.", "Task Saved");  // This will be replaced with a delayed animation in the future. For now this works well enough for confirmation.  <<<------ IMPORTANT
+                                        _navigationViewModel.SelectedViewModel = new AddTasksViewModel(_navigationViewModel, CurrentModuleName);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show($"Something went wroung.{Environment.NewLine}Could not save Task.", "Oops  :(", MessageBoxButton.OK, MessageBoxImage.Error);
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show($"The name '{NewInstallProgram.Name.ToString()}' is currently in use by another task.{Environment.NewLine}Please choose another name.", "Name Already In Use", MessageBoxButton.OK, MessageBoxImage.Error);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show($"The name '{NewInstallProgram.Name.ToString()}' is invalid (null) or the script source does not exist.{Environment.NewLine}Please confirm the name and script source are valid.", "Invalid Properties", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        break;
+                    }
+                case 2: //Add Local Admin
+                    {
+                        if (NewLocalAdmin.UserName.ToString() != "")
+                        {
+                            NewLocalAdmin.Name = $"Local Admin: {NewLocalAdmin.UserName}";
 
                             using (TextWriter writer = new StreamWriter(TasksOutputPath))
                             {
@@ -197,46 +263,42 @@ namespace SetupAssistent.ViewModel
 
                                 tempOC = AllTasks.tasksList;
 
-                                foreach (InstallProgram IP in tempOC[0].InstallProgramTasks)
-                                {
-                                    if (IP.Name.ToString() == NewInstallProgram.Name.ToString())
-                                    {
-                                        nameUsed = true;
-                                    }
-                                }
+                                nameUsed = AllTasks.tasksList[0].AddLocalAdminTasks.Where(x => x.UserName == NewLocalAdmin.UserName).Count() > 0;
 
                                 if (!nameUsed)
                                 {
-                                    XmlSerializer xmlS = new XmlSerializer(typeof(ObservableCollection<ModuleTasks>));
-                                    tempOC[0].InstallProgramTasks.Add(NewInstallProgram);
-                                    xmlS.Serialize(writer, tempOC);
-                                    saved = true;
+                                    try
+                                    {
+                                        XmlSerializer xmlS = new XmlSerializer(typeof(ObservableCollection<ModuleTasks>));
+                                        tempOC[0].AddLocalAdminTasks.Add(NewLocalAdmin);
+                                        xmlS.Serialize(writer, tempOC);
+                                        saved = true;
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        MessageBox.Show(ex.Message);
+                                    }
 
                                     if (saved)
                                     {
-                                        MessageBox.Show(String.Format("Task '{0}' was saved.", NewInstallProgram.Name.ToString()), "Task Saved");  // This will be replaced with a delayed animation in the future. For now this works well enough for confirmation.  <<<------ IMPORTANT
+                                        MessageBox.Show($"Task '{NewLocalAdmin.UserName.ToString()}' was saved.", "Task Saved");  // This will be replaced with a delayed animation in the future. For now this works well enough for confirmation.  <<<------ IMPORTANT
                                         _navigationViewModel.SelectedViewModel = new AddTasksViewModel(_navigationViewModel, CurrentModuleName);
                                     }
                                     else
                                     {
-                                        MessageBox.Show(String.Format("Something went wroung.{0}Could not save Task.", Environment.NewLine), "Oops  :(", MessageBoxButton.OK, MessageBoxImage.Error);
+                                        MessageBox.Show($"Something went wroung.{Environment.NewLine}Could not save Task.", "Oops  :(", MessageBoxButton.OK, MessageBoxImage.Error);
                                     }
                                 }
                                 else
                                 {
-                                    MessageBox.Show(String.Format("The name '{0}' is currently in use by another task.{1}Please choose another name.", NewInstallProgram.Name.ToString(), Environment.NewLine), "Name Already In Use", MessageBoxButton.OK, MessageBoxImage.Error);
+                                    MessageBox.Show($"The name '{NewLocalAdmin.UserName.ToString()}' is currently in use by another task.{Environment.NewLine}Please choose another name.", "Name Already In Use", MessageBoxButton.OK, MessageBoxImage.Error);
                                 }
                             }
                         }
                         else
                         {
-                            MessageBox.Show(String.Format("The name '{0}' is invalid (null) or the script source does not exist.{1}Please confirm the name and script source are valid.", NewInstallProgram.Name.ToString(), Environment.NewLine), "Invalid Properties", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show($"The name '{NewLocalAdmin.UserName.ToString()}' is invalid (null).{Environment.NewLine}Please confirm the name and script source are valid.", "Invalid Properties", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
-                        break;
-                    }
-                case 2: //Add Local Admin
-                    {
-
                         break;
                     }
             }

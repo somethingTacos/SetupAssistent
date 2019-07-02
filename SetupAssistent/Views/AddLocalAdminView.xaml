@@ -25,12 +25,14 @@
             <RowDefinition Height="10"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
         <!-- UserName -->
         <TextBlock Text="Type the username of the Active Directory user below." Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <TextBlock Text="User Name:" Grid.Column="1" Grid.Row="2"/>
-        <TextBox Style="{StaticResource GenericTextBox}" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" Height="25"
-                 VerticalContentAlignment="Center"/>
+        <TextBlock Text="{Binding UserDomain}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"/>
+        <TextBlock Text="User Name:" Grid.Column="1" Grid.Row="3"/>
+        <TextBox Style="{StaticResource GenericTextBox}" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" Height="25"
+                 VerticalContentAlignment="Center" Text="{Binding NewLocalAdmin.UserName}"/>
     </Grid>
 </UserControl>
